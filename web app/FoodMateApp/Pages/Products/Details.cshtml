@@ -1,0 +1,61 @@
+﻿@page
+@model FoodMateApp.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Products</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Products.Category)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Products.Category)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Products.ProductNameEng)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Products.ProductNameEng)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Products.Kcal)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Products.Kcal)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Products.Protein)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Products.Protein)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Products.Carbs)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Products.Carbs)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Products.Fats)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Products.Fats)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Products.ProductNamePl)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Products.ProductNamePl)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Products.ProductId">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>
