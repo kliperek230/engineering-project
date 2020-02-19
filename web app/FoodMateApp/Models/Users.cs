@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace FoodMateApp.Models
 {
@@ -13,15 +14,23 @@ namespace FoodMateApp.Models
         }
 
         public int UserId { get; set; }
+        [Required]
         public string FirstName { get; set; }
+        [Required]
         public string LastName { get; set; }
+        [Required]
         public string Sex { get; set; }
+        [Required]
         public DateTime BirthDate { get; set; }
+        [Required]
         public int UHeight { get; set; }
         public int UWeight { get; set; }
         public string Email { get; set; }
+        [Required]
         public string Pswd { get; set; }
+        [Required]
         public string Nickname { get; set; }
+        [Required]
         public double? Kcal { get; set; }
         public double? Protein { get; set; }
         public double? Carbs { get; set; }

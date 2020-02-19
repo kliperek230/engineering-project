@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\Nowy folder\" />
+    <None Include="wwwroot\img\logo.jpg" />
   </ItemGroup>
 
 
