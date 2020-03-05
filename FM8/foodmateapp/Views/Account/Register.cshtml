@@ -1,0 +1,146 @@
+﻿<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100 p-t-50 p-b-0">
+            <form class="login100-form validate-form" method="post" action="RegisterUser">
+                <div class="wrap-input100 validate-input m-b-10" data-validate="Email is required">
+                    <input class="input100" type="text" name="FirstName" id="FirstName" placeholder="Imię">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <i class="fa fa-user"></i>
+                    </span>
+                </div>
+                <div class="wrap-input100 validate-input m-b-10" data-validate="Password is required">
+                    <input class="input100" type="text" name="LastName" id="LastName" placeholder="Nazwisko">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <i class="fa fa-lock"></i>
+                    </span>
+                </div>
+                <div class="wrap-input100 validate-input m-b-10" data-validate="Password is required">
+                    <input class="input100" type="text" name="Sex" id="Sex" placeholder="Płeć">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <i class="fa fa-lock"></i>
+                    </span>
+                </div>
+                <div class="wrap-input100 validate-input m-b-10" data-validate="Password is required">
+                    <input class="input100" type="text" name="BirthDate" id="BirthDate" placeholder="YY-MM-DD">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <i class="fa fa-lock"></i>
+                    </span>
+                </div>
+                <div class="wrap-input100 validate-input m-b-10" data-validate="Password is required">
+                    <input class="input100" type="text" name="UHeight" id="UHeight" placeholder="Wzrost">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <i class="fa fa-lock"></i>
+                    </span>
+                </div>
+                <div class="wrap-input100 validate-input m-b-10" data-validate="Password is required">
+                    <input class="input100" type="text" name="UWeight" id="UWeight" placeholder="Waga">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <i class="fa fa-lock"></i>
+                    </span>
+                </div>
+                <div class="wrap-input100 validate-input m-b-10" data-validate="Password is required">
+                    <input class="input100" type="text" name="Nickname" id="Nickname" placeholder="Pseudonim">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <i class="fa fa-lock"></i>
+                    </span>
+                </div>
+                <div class="wrap-input100 validate-input m-b-10" data-validate="Password is required">
+                    <input class="input100" type="text" name="Email" id="Email" placeholder="Email">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <i class="fa fa-lock"></i>
+                    </span>
+                </div>
+                <div class="wrap-input100 validate-input m-b-10" data-validate="Password is required">
+                    <input class="input100" type="text" name="Email_confirm" id="Email_confirm" placeholder="Potwierdź">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <i class="fa fa-lock"></i>
+                    </span>
+                </div>
+                <div class="wrap-input100 validate-input m-b-10" data-validate="Password is required">
+                    <input class="input100" type="text" name="Pswd" id="Pswd" placeholder="Hasło">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <i class="fa fa-lock"></i>
+                    </span>
+                </div>
+                <div class="wrap-input100 validate-input m-b-10" data-validate="Password is required">
+                    <input class="input100" type="text" name="Pswd_confirm" id="Pswd_confirm" placeholder="Potwierdź">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <i class="fa fa-lock"></i>
+                    </span>
+                </div>
+                <div class="container-login100-form-btn p-t-10">
+                    @*<input type="button" value="Register" class="login100-form-btn" onclick="Register()">*@
+                    <button type="submit" class="popup btn btn-info pull-right">Zarejestruj</button>
+                    <div class="email_modal">
+
+                        <div class="modal-content">
+                            <span class="close">&times;</span>
+                            <p>Adresy Email nie są jednakowe!</p>
+                        </div>
+
+                    </div>
+                    <div class="pswd_modal">
+
+                        <div class="modal-content">
+                            <span class="close">&times;</span>
+                            <p>Hasła nie są takie same!</p>
+                        </div>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    var email_modal = document.getElementsByClassName("email_modal")[0];
+    var pswd_modal = document.getElementsByClassName("pswd_modal")[0];
+    var btn = document.getElementsByClassName("popup")[0];
+    var span = document.getElementsByClassName("close")[0];
+    var email = document.getElementById("Email");
+    var email_confirm = document.getElementById("Email_confirm");
+    var pswd = document.getElementById("Pswd");
+    var pswd_confirm = document.getElementById("Pswd_confirm");
+
+    btn.onclick = function () {
+        if (email == email_confirm) {
+            if (pswd == pswd_confirm) {
+
+            }
+            else {
+                pswd_modal.style.display = "block";
+            }
+        }
+        else {
+            email_modal.style.display = "block";
+        };
+    }
+
+    span.onclick = function () {
+        if (email_modal.style.display = "block") {
+            email_modal.style.display = "none";
+        } else if (pswd_modal.style.display = "block") {
+            pswd_modal.style.display = "none";
+        };
+    }
+
+    window.onclick = function (event) {
+        if (event.target == this.email_modal) {
+            this.email_modal.style.display = "none";
+        } else if (event.target == this.pswd_modal) {
+            this.pswd_modal.style.display = "none";
+        };
+    }
+</script>
