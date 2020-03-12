@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace foodmateapp.Model
 {
-    public partial class Users
+    public class Users
     {
         public Users()
         {
@@ -82,9 +82,9 @@ namespace foodmateapp.Model
         [Column("measurements")]
         public int? Measurements { get; set; }
 
-        [Column("u_type")]
+        [Column("Token")]
         [StringLength(20)]
-        public string UType { get; set; }
+        public string Token { get; set; }
 
 
         [ForeignKey(nameof(Bench))]

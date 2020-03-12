@@ -5,6 +5,8 @@ using foodmateapp.Model;
 using System.Linq;
 using Microsoft.Data.SqlClient;
 using System;
+using Microsoft.AspNetCore.Http;
+using System.Security.Claims;
 
 namespace foodmateapp.Controllers
 {
@@ -12,6 +14,7 @@ namespace foodmateapp.Controllers
     {
         FoodmateContext db = new FoodmateContext();
         private string _connectionString = "Server=KACPER;Database=FOODMATE;Trusted_Connection=True;";
+
         public IActionResult Index()
         {
             return View();
@@ -39,7 +42,8 @@ namespace foodmateapp.Controllers
             {
                 if (_user.Where(s => s.Pswd == user.Pswd).Any())
                 {
-                    return Json(new { status = true, message = "Login Successfull!" });
+                    
+                    return Json(new { status = false, message = "A" });
                 }
                 else
                 {
@@ -64,9 +68,7 @@ namespace foodmateapp.Controllers
             {
                 db.Users.Add(user);
                 db.SaveChanges();
-                // tutaj trzeba wpisać return na stronę Index użytkownika
-                //return RedirectToAction("Index", "Users");
-                return Json(new { status = true, message = "Login Successfull!" });
+                return RedirectToAction("Index", "Users");
             } else
             {
                 //return View();
