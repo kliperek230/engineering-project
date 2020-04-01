@@ -21,7 +21,7 @@ namespace foodmateapp.Model
         [InverseProperty(nameof(Products.Meals))]
         public virtual Products Product { get; set; }
         [ForeignKey(nameof(UserId))]
-        [InverseProperty(nameof(Users.Meals))]
-        public virtual Users User { get; set; }
+        [InverseProperty(nameof(Model.User.Meals))]
+        public virtual User User { get; set; }
     }
 }

@@ -1,0 +1,79 @@
+﻿@page
+@model ResultsGymModel
+@{
+    Layout = "Shared/_LayoutUser";
+    ViewData["Title"] = "Lifts";
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Welcome</title>
+</head>
+<body>
+    <div class="form-group row">
+        <div class="p-2 w-50">
+            <form method="post">
+                <div class="form-group">
+                    <label id="Day">Data</label>
+                    <select class="form-control Day" name="Day">
+                        @for (var x = 1; x <= 31; x++)
+                        {
+                            <option>@x</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label id="Month">Month</label>
+                    <select class="form-control Month" name="Month">
+                        <option>Styczeń</option>
+                        <option>Luty</option>
+                        <option>Marzec</option>
+                        <option>Kwiecień</option>
+                        <option>Maj</option>
+                        <option>Czerwiec</option>
+                        <option>Lipiec</option>
+                        <option>Sierpień</option>
+                        <option>Wrzesień</option>
+                        <option>Październik</option>
+                        <option>Listopad</option>
+                        <option>Grudzień</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label id="Year">Data</label>
+                    <select class="form-control Year" name="Year">
+                        @for (var x = 2020; x >= 1901; x--)
+                        {
+                            <option>@x</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label id="Lift">Lift</label>
+                    <select class="form-control Lift" name="Lift">
+                        <option>Wyciskanie leżąc</option>
+                        <option>Wyciskanie stojąc</option>
+                        <option>Przysiad</option>
+                        <option>Martwy ciąg</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label id="Value">Value</label>
+                    <input type="text" class="form-control Value" name="Value" placeholder="kg" />
+                </div>
+                <div class="container-login100-form-btn p-t-10">
+                    <button type="submit" id="submit_btn" class="submit btn btn-info pull-right">TAK</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+

@@ -9,10 +9,10 @@ namespace foodmateapp.Model
     {
         public Lifts()
         {
-            UsersBenchNavigation = new HashSet<Users>();
-            UsersDeadliftNavigation = new HashSet<Users>();
-            UsersOhpNavigation = new HashSet<Users>();
-            UsersSquatNavigation = new HashSet<Users>();
+            UsersBenchNavigation = new HashSet<User>();
+            UsersDeadliftNavigation = new HashSet<User>();
+            UsersOhpNavigation = new HashSet<User>();
+            UsersSquatNavigation = new HashSet<User>();
         }
 
         [Key]
@@ -34,15 +34,15 @@ namespace foodmateapp.Model
         public int Value { get; set; }
 
         [ForeignKey(nameof(UserId))]
-        [InverseProperty(nameof(Users.Lifts))]
-        public virtual Users User { get; set; }
-        [InverseProperty(nameof(Users.BenchNavigation))]
-        public virtual ICollection<Users> UsersBenchNavigation { get; set; }
-        [InverseProperty(nameof(Users.DeadliftNavigation))]
-        public virtual ICollection<Users> UsersDeadliftNavigation { get; set; }
-        [InverseProperty(nameof(Users.OhpNavigation))]
-        public virtual ICollection<Users> UsersOhpNavigation { get; set; }
-        [InverseProperty(nameof(Users.SquatNavigation))]
-        public virtual ICollection<Users> UsersSquatNavigation { get; set; }
+        [InverseProperty(nameof(Model.User.Lifts))]
+        public virtual User User { get; set; }
+        [InverseProperty(nameof(Model.User.BenchNavigation))]
+        public virtual ICollection<User> UsersBenchNavigation { get; set; }
+        [InverseProperty(nameof(Model.User.DeadliftNavigation))]
+        public virtual ICollection<User> UsersDeadliftNavigation { get; set; }
+        [InverseProperty(nameof(Model.User.OhpNavigation))]
+        public virtual ICollection<User> UsersOhpNavigation { get; set; }
+        [InverseProperty(nameof(Model.User.SquatNavigation))]
+        public virtual ICollection<User> UsersSquatNavigation { get; set; }
     }
 }

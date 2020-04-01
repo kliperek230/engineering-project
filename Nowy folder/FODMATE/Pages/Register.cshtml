@@ -1,0 +1,70 @@
+﻿@page
+@model FOODMATE.Pages.Shared.RegisterModel
+@{
+    ViewData["Title"] = "Register page";
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+
+    <h3>Login Form</h3>
+    @Model.Msg
+    <form method="post" asp-page="Register" id="register_form">
+        <table>
+            <tr>
+                <td>Imię</td>
+                <td><input type="text" asp-for="@Model.FirstName" /></td>
+            </tr>
+            <tr>
+                <td>Nazwisko</td>
+                <td><input type="text" asp-for="@Model.LastName" /></td>
+            </tr>
+            <tr>
+                <td>Płeć</td>
+                <td><input type="text" asp-for="@Model.Sex" /></td>
+            </tr>
+            <tr>
+                <td>Data urodzin</td>
+                <td><input type="text" asp-for="@Model.BirthDate" /></td>
+            </tr>
+            <tr>
+                <td>Wzrost</td>
+                <td><input type="text" asp-for="@Model.UHeight" /></td>
+            </tr>
+            <tr>
+                <td>Waga</td>
+                <td><input type="text" asp-for="@Model.UWeight" /></td>
+            </tr>
+            <tr>
+                <td>Username</td>
+                <td><input type="text" asp-for="@Model.Username" /></td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td><input type="text" asp-for="@Model.Email" /></td>
+            </tr>
+            <tr>
+                <td>Potwierdź</td>
+                <td><input type="text" asp-for="@Model.EmailConfirm" /></td>
+            </tr>
+            <tr>
+                <td>hasło</td>
+                <td><input type="password" asp-for="@Model.Password" /></td>
+            </tr>
+            <tr>
+                <td>Ptwierdź</td>
+                <td><input type="password" asp-for="@Model.PasswordConfirm" /></td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td><input type="submit" value="Register" /></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

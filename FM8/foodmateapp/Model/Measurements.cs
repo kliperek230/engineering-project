@@ -9,7 +9,7 @@ namespace foodmateapp.Model
     {
         public Measurements()
         {
-            Users = new HashSet<Users>();
+            Users = new HashSet<User>();
         }
 
         [Key]
@@ -46,8 +46,8 @@ namespace foodmateapp.Model
 
         [ForeignKey(nameof(UserId))]
         [InverseProperty("MeasurementsNavigation")]
-        public virtual Users User { get; set; }
+        public virtual User User { get; set; }
         [InverseProperty("Measurements1")]
-        public virtual ICollection<Users> Users { get; set; }
+        public virtual ICollection<User> Users { get; set; }
     }
 }

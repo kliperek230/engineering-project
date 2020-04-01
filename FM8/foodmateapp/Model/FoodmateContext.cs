@@ -19,9 +19,7 @@ namespace foodmateapp.Model
         public virtual DbSet<Meals> Meals { get; set; }
         public virtual DbSet<Measurements> Measurements { get; set; }
         public virtual DbSet<Products> Products { get; set; }
-        public virtual DbSet<Role> Role { get; set; }
-        public virtual DbSet<UserRole> UserRole { get; set; }
-        public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<User> User { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -85,19 +83,7 @@ namespace foodmateapp.Model
                 entity.Property(e => e.ProductNamePl).IsUnicode(false);
             });
 
-            modelBuilder.Entity<Role>(entity =>
-            {
-                entity.HasNoKey();
-
-                entity.Property(e => e.Name).IsUnicode(false);
-            });
-
-            modelBuilder.Entity<UserRole>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-            });
-
-            modelBuilder.Entity<Users>(entity =>
+            modelBuilder.Entity<User>(entity =>
             {
                 entity.HasKey(e => e.UserId)
                     .HasName("PK__users__B9BE370F38AA58BF");

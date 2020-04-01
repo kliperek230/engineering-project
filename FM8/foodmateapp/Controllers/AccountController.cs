@@ -7,6 +7,7 @@ using Microsoft.Data.SqlClient;
 using System;
 using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace foodmateapp.Controllers
 {
@@ -29,15 +30,15 @@ namespace foodmateapp.Controllers
         {
             return View();
         }
-
+        [Authorize]
         public IActionResult Calculator()
         {
             return View();
         }
 
-        public ActionResult Validate(Users user)
+        public ActionResult Validate(User user)
         {
-            var _user = db.Users.Where(s => s.Email == user.Email);
+            var _user = db.User.Where(s => s.Email == user.Email);
             if (_user.Any())
             {
                 if (_user.Where(s => s.Pswd == user.Pswd).Any())
@@ -47,7 +48,7 @@ namespace foodmateapp.Controllers
                 }
                 else
                 {
-                    return Json(new { status = false, message = "Invalid Password!" });
+                    return Json(new { status = false, message = "B" });
                 }
             }
             else
@@ -57,7 +58,7 @@ namespace foodmateapp.Controllers
         }
 
         [HttpPost]
-        public ActionResult RegisterUser(Users user)
+        public ActionResult RegisterUser(User user)
         {
             string email = Request.Form["Email"];
             string email_confrm = Request.Form["Email_confirm"];
@@ -66,7 +67,7 @@ namespace foodmateapp.Controllers
 
             if (email == email_confrm & pswd == pswd_confrm)
             {
-                db.Users.Add(user);
+                db.User.Add(user);
                 db.SaveChanges();
                 return RedirectToAction("Index", "Users");
             } else
@@ -77,7 +78,7 @@ namespace foodmateapp.Controllers
         }
 
         [HttpPost]
-        public ActionResult UpdateUserMacros(Users users)
+        public ActionResult UpdateUserMacros(User users)
         {
             int Kcal = int.Parse(Request.Form["Kcal"]);
             int Protein = int.Parse(Request.Form["Protein"]);
