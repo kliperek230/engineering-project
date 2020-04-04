@@ -10,9 +10,9 @@ using FusionCharts.Visualization;
 using Microsoft.AspNetCore.Http;
 using System.Data.SqlClient;
 
-namespace FOODMATE
+namespace FODMATE
 {
-    public class ProgressBodyModel : PageModel
+    public class ProgressGymModel : PageModel
     {
         // KONIECZNIE TRZEBA USUNĄĆ STĄD TAK JAWNY CONNECTION STRING!!!!!!!!!!!!!!!!!!!
         private string _connectionString = "Server=KACPER;Database=FOODMATE;Trusted_Connection=True;";
@@ -28,53 +28,47 @@ namespace FOODMATE
             int userID = Convert.ToInt32(HttpContext.Session.GetInt32("userID"));
 
             var MonthList = new List<string>() { "Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień" };
-                     
+
             int StartDay = int.Parse(Request.Form["StartDay"]);
             string StartMonth = Request.Form["StartMonth"].ToString();
             int StartYear = int.Parse(Request.Form["StartYear"]);
             int StartMonthValue = MonthList.IndexOf(StartMonth) + 1;
             string StartDate = StartYear + "-" + StartMonthValue + "-" + StartDay;
 
-            int EndDay = int.Parse(Request.Form["EndDay"]);           
+            int EndDay = int.Parse(Request.Form["EndDay"]);
             string EndMonth = Request.Form["EndMonth"].ToString();
-            int EndYear = int.Parse(Request.Form["EndYear"]);            
-            int EndMonthValue = MonthList.IndexOf(EndMonth) + 1;                          
+            int EndYear = int.Parse(Request.Form["EndYear"]);
+            int EndMonthValue = MonthList.IndexOf(EndMonth) + 1;
             string EndDate = EndYear + "-" + EndMonthValue + "-" + EndDay;
 
-            string BodyPart = Request.Form["BodyPart"].ToString();
-            IDictionary<string, string> BodyPartQueryList = new Dictionary<string, string>()
+            string Lift = Request.Form["Lift"].ToString();
+            IDictionary<string, string> LiftQueryList = new Dictionary<string, string>()
             {
-                {"Lewa łydka", "l_calve" },
-                {"Prawa łydka", "r_calve" },
-                {"Lewe udo", "l_thigh" },
-                {"Prawe udo", "r_thigh" },
-                {"Pośladki", "butt" },
-                {"Pas", "waist" },
-                {"Klatka piersiowa", "chest" },
-                {"Lewe ramię", "l_arm" },
-                {"Prawe ramię", "r_arm" },
-                {"Lewe przedramię", "l_forearm" },
-                {"Prawe przedramię", "r_forearm" },
-                {"Waga", "u_weight" }
+                {"Wyciskanie leżąc", "BENCH" },
+                {"Wyciskanie stojąc", "OHP" },
+                {"Przysiad", "SQUAT" },
+                {"Martwy ciąg", "DEADLIFT" },
             };
-            string BodyPartQuery = BodyPartQueryList[BodyPart];
+
+            string LiftQuery = LiftQueryList[Lift];
 
 
-            List<string> BodyPartList;
+            List<string> LiftList;
             List<string> DateList;
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                string query = "SELECT * FROM [FOODMATE].[dbo].[Measurements] WHERE user_id = @userID AND m_date BETWEEN @StartDate AND @EndDate;";
+                string query = "SELECT value, m_date FROM [FOODMATE].[dbo].[Lifts] WHERE user_id = @userID AND lift_name = @liftName AND m_date BETWEEN @StartDate AND @EndDate;";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@StartDate", StartDate);
                     command.Parameters.AddWithValue("@EndDate", EndDate);
                     command.Parameters.AddWithValue("@userID", userID);
+                    command.Parameters.AddWithValue("@liftName", LiftQuery);
 
                     connection.Open();
 
-                    BodyPartList = new List<string>();
+                    LiftList = new List<string>();
                     DateList = new List<string>();
 
                     DataTable dt = new DataTable();
@@ -82,7 +76,7 @@ namespace FOODMATE
                     adapter.Fill(dt);
                     foreach (DataRow row in dt.Rows)
                     {
-                        BodyPartList.Add(row[BodyPartQuery].ToString());
+                        LiftList.Add(row["value"].ToString());
                         DateList.Add(row["m_date"].ToString());
                     }
                     connection.Close();
@@ -98,7 +92,7 @@ namespace FOODMATE
             var i = 0;
             foreach (var day in DateList)
             {
-                ChartData.Rows.Add(DateList[i], BodyPartList[i]);
+                ChartData.Rows.Add(DateList[i], LiftList[i]);
                 i++;
             }
 
@@ -116,11 +110,11 @@ namespace FOODMATE
             lineChart.Height.Pixel(400);
             lineChart.Data.Source = model;
 
-            lineChart.Caption.Text = BodyPart;
+            lineChart.Caption.Text = Lift;
             lineChart.Caption.Bold = true;
 
             lineChart.XAxis.Text = "Czas";
-            lineChart.YAxis.Text = "cm";
+            lineChart.YAxis.Text = "kg";
 
             lineChart.Legend.Show = false;
             lineChart.ThemeName = FusionChartsTheme.ThemeName.FUSION;

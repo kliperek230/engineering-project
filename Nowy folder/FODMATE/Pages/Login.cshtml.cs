@@ -41,7 +41,6 @@ namespace FOODMATE.Pages
                     using (SqlConnection connection = new SqlConnection(_connectionString))
                     {
                         string query = "SELECT * FROM [FOODMATE].[dbo].[User] WHERE username= @Username AND password= @Password";
-
                         using (SqlCommand command = new SqlCommand(query, connection))
                         {
                             int userID = 0;
@@ -91,7 +90,7 @@ namespace FOODMATE.Pages
                                     //userSquat = Convert.ToInt32((dr["squat"]));
                                     //userDeadlift = Convert.ToInt32((dr["deadlift"]));
                                 }
-
+                                
                             }
                             connection.Close();
 
@@ -111,11 +110,9 @@ namespace FOODMATE.Pages
                             HttpContext.Session.SetInt32("userOhp", userOhp);
                             HttpContext.Session.SetInt32("userSquat", userSquat);
                             HttpContext.Session.SetInt32("userDeadlift", userDeadlift);
-                            return RedirectToPage("User/HomePage");
-                        }
-                    }
-
-
+                            return RedirectToPage("User/HomePage");                           
+                        }                      
+                    }                   
                 }
             }
             return null;

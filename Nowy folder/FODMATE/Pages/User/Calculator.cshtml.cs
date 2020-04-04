@@ -58,6 +58,8 @@ namespace FOODMATE
 
 
                     connection.Open();
+                    command.ExecuteNonQuery();
+                    connection.Close();
                     return RedirectToPage("HomePage");
                 }
             }
@@ -65,7 +67,7 @@ namespace FOODMATE
 
         public IActionResult OnGetLogout()
         {
-            return RedirectToPage("Login");
+            return RedirectToPage("../Login");
         }
     }
 }

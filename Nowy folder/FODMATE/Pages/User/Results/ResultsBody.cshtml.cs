@@ -9,7 +9,9 @@ using FusionCharts.Visualization;
 using FusionCharts.DataEngine;
 using System.Data;
 
-namespace FODMATE
+
+
+namespace FOODMATE
 {
     public class ResultsBodyModel : PageModel
     {
@@ -42,13 +44,13 @@ namespace FODMATE
 
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
-
+                    
                     command.Parameters.AddWithValue("@userID", userID);
 
                     List<Measurements> singleUser = new List<Measurements>();
 
                     connection.Open();
-
+                    
                     using (SqlDataReader dr = command.ExecuteReader())
                     {
                         while (dr.Read())
@@ -72,12 +74,12 @@ namespace FODMATE
                     connection.Close();
                 }
             }
-
+            
         }
 
         public IActionResult OnPost()
         {
-
+                        
             int userID = Convert.ToInt32(HttpContext.Session.GetInt32("userID"));
 
             var MonthList = new List<string>() { "Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień" };
@@ -128,6 +130,7 @@ namespace FODMATE
                     command.Parameters.AddWithValue("@UserWeight", UserWeight);
 
                     connection.Open();
+                    command.ExecuteNonQuery();
                     connection.Close();
                     return RedirectToPage("../HomePage");
                 }

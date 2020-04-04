@@ -1,0 +1,153 @@
+﻿@page
+@model DietModel
+@{
+    ViewData["Title"] = "Diet";
+    Layout = "Shared/_LayoutUser";
+
+}
+    <form method="post">
+        <ul class="list-group" id="Breakfast">
+            <li class="list-group-item">
+                <ul class="list-group list-group-horizontal">
+                    <li class="list-group-item">Śniadanie</li>
+                    @foreach (var product in Model.BreakfastSum)
+                    {
+                        <li class="list-group-item">
+                            <ul class="list-group list-group-horizontal">
+                                <li class="list-group-item">@product.Kcal</li>
+                                <li class="list-group-item">@product.Protein</li>
+                                <li class="list-group-item">@product.Carbs</li>
+                                <li class="list-group-item">@product.Fats</li>
+                            </ul>
+                        </li>
+                    }
+                    <li class="list-group-item">
+                        <input type="submit" name="BreakfastButton" value="Add" />
+                    </li>
+                </ul>
+            </li>
+            @foreach (var product in Model.BreakfastProducts)
+            {
+                <li class="list-group-item">
+                    <ul class="list-group list-group-horizontal">
+                        <li class="list-group-item">@product.ProductName</li>
+                        <li class="list-group-item">@product.ProductAmmount</li>
+                        <li class="list-group-item">@product.ProductKcal</li>
+                        <li class="list-group-item">@product.ProductProtein</li>
+                        <li class="list-group-item">@product.ProductCarbs</li>
+                        <li class="list-group-item">@product.ProductFats</li>
+                    </ul>
+                </li>
+            }
+        </ul>
+        <ul class="list-group" id="SecondBreakfast">
+            <li class="list-group-item">
+                <ul class="list-group list-group-horizontal">
+                    <li class="list-group-item">II Śniadanie</li>
+                    @foreach (var product in Model.SecondBreakfastSum)
+                    {
+                        <li class="list-group-item">
+                            <ul class="list-group list-group-horizontal">
+                                <li class="list-group-item">@product.Kcal</li>
+                                <li class="list-group-item">@product.Protein</li>
+                                <li class="list-group-item">@product.Carbs</li>
+                                <li class="list-group-item">@product.Fats</li>
+                            </ul>
+                        </li>
+                    }
+                    <li class="list-group-item">
+                        <input type="submit" name="SecondBreakfastButton" value="Add" />
+                    </li>
+                </ul>
+            </li>
+            @foreach (var product in Model.SecondBreakfastProducts)
+            {
+                <li class="list-group-item">
+                    <ul class="list-group list-group-horizontal">
+                        <li class="list-group-item">@product.ProductName</li>
+                        <li class="list-group-item">@product.ProductAmmount</li>
+                        <li class="list-group-item">@product.ProductKcal</li>
+                        <li class="list-group-item">@product.ProductProtein</li>
+                        <li class="list-group-item">@product.ProductCarbs</li>
+                        <li class="list-group-item">@product.ProductFats</li>
+                    </ul>
+                </li>
+            }
+        </ul>
+        <ul class="list-group" id="Dinner">
+            <li class="list-group-item">
+                <ul class="list-group list-group-horizontal">
+                    <li class="list-group-item">Obiad</li>
+                    @foreach (var product in Model.DinnerSum)
+                    {
+                    <li class="list-group-item">
+                        <ul class="list-group list-group-horizontal">
+                            <li class="list-group-item">@product.Kcal</li>
+                            <li class="list-group-item">@product.Protein</li>
+                            <li class="list-group-item">@product.Carbs</li>
+                            <li class="list-group-item">@product.Fats</li>
+                        </ul>
+                    </li>
+                    }
+                    <li class="list-group-item">
+                        <input type="submit" name="DinnerButton" value="Add" />
+                    </li>
+                </ul>
+            </li>
+            @foreach (var product in Model.DinnerProducts)
+            {
+                <li class="list-group-item">
+                    <ul class="list-group list-group-horizontal">
+                        <li class="list-group-item">@product.ProductName</li>
+                        <li class="list-group-item">@product.ProductAmmount</li>
+                        <li class="list-group-item">@product.ProductKcal</li>
+                        <li class="list-group-item">@product.ProductProtein</li>
+                        <li class="list-group-item">@product.ProductCarbs</li>
+                        <li class="list-group-item">@product.ProductFats</li>
+                    </ul>
+                </li>
+            }
+        </ul>
+        <ul class="list-group" id="Supper">
+            <li class="list-group-item">
+                <ul class="list-group list-group-horizontal">
+                    <li class="list-group-item">Kolacja</li>
+                    @foreach (var product in Model.SupperSum)
+                    {
+                        <li class="list-group-item">
+                            <ul class="list-group list-group-horizontal">
+                                <li class="list-group-item">@product.Kcal</li>
+                                <li class="list-group-item">@product.Protein</li>
+                                <li class="list-group-item">@product.Carbs</li>
+                                <li class="list-group-item">@product.Fats</li>
+                            </ul>
+                        </li>
+                    }
+                    <li class="list-group-item">
+                        <input type="submit" name="SupperButton" value="Add" />
+                    </li>
+                </ul>
+            </li>
+            @foreach (var product in Model.SupperProducts)
+            {
+                <li class="list-group-item">
+                    <ul class="list-group list-group-horizontal">
+                        <li class="list-group-item">@product.ProductName</li>
+                        <li class="list-group-item">@product.ProductAmmount</li>
+                        <li class="list-group-item">@product.ProductKcal</li>
+                        <li class="list-group-item">@product.ProductProtein</li>
+                        <li class="list-group-item">@product.ProductCarbs</li>
+                        <li class="list-group-item">@product.ProductFats</li>
+                    </ul>
+                </li>
+            }
+        </ul>
+        @* Przekierowanie na stronę z historią wpisów
+        <input type="submit" name="Login" value="Login" />
+         *@
+    </form>
+
+
+
+
+
