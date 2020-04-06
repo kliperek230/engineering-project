@@ -8,9 +8,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace FOODMATE
+namespace FODMATE
 {
-    public class DietModel : PageModel
+    public class DietHistoryModel : PageModel
     {
         // KONIECZNIE TRZEBA USUNĄĆ STĄD TAK JAWNY CONNECTION STRING!!!!!!!!!!!!!!!!!!!
         private string _connectionString = "Server=KACPER;Database=FOODMATE;Trusted_Connection=True;";
@@ -50,8 +50,61 @@ namespace FOODMATE
 
         public void OnGet()
         {
-            userID = Convert.ToInt32(HttpContext.Session.GetInt32("userID"));
-            DateNow = DateTime.UtcNow.ToString("yyyy-MM-dd");
+            BreakfastProducts = new List<Product>();
+            SecondBreakfastProducts = new List<Product>();
+            DinnerProducts = new List<Product>();
+            SupperProducts = new List<Product>();
+
+            BreakfastSum = new List<ProductMacroSum>();
+            BreakfastSum.Add(new ProductMacroSum()
+            {
+                Kcal = 0,
+                Protein = 0,
+                Carbs = 0,
+                Fats = 0
+            });
+
+            SecondBreakfastSum = new List<ProductMacroSum>();
+            SecondBreakfastSum.Add(new ProductMacroSum()
+            {
+                Kcal = 0,
+                Protein = 0,
+                Carbs = 0,
+                Fats = 0
+            });
+
+            DinnerSum = new List<ProductMacroSum>();
+            DinnerSum.Add(new ProductMacroSum()
+            {
+                Kcal = 0,
+                Protein = 0,
+                Carbs = 0,
+                Fats = 0
+            });
+
+            SupperSum = new List<ProductMacroSum>();
+            SupperSum.Add(new ProductMacroSum()
+            {
+                Kcal = 0,
+                Protein = 0,
+                Carbs = 0,
+                Fats = 0
+            });
+        }
+
+        public void OnPost()
+        {
+            int userID = Convert.ToInt32(HttpContext.Session.GetInt32("userID"));
+
+            var MonthList = new List<string>() { "Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień" };
+
+            int Day = int.Parse(Request.Form["Day"]);
+            string Month = Request.Form["Month"].ToString();
+            int Year = int.Parse(Request.Form["Year"]);
+            int MonthValue = MonthList.IndexOf(Month) + 1;
+            string Date = Year + "-" + MonthValue + "-" + Day;
+
+            
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
@@ -62,7 +115,7 @@ namespace FOODMATE
 
                 using (SqlCommand command = new SqlCommand(querySelectMeals, connection))
                 {
-                    command.Parameters.AddWithValue("@Date", DateNow);
+                    command.Parameters.AddWithValue("@Date", Date);
                     command.Parameters.AddWithValue("@userID", userID);
 
                     connection.Open();
@@ -92,7 +145,8 @@ namespace FOODMATE
                                 ProductFats = Convert.ToDouble(row["fats"]),
                                 Meal = row["meal"].ToString()
                             });
-                        } else if (row["meal"].ToString() == "SECOND BREAKFAST")
+                        }
+                        else if (row["meal"].ToString() == "SECOND BREAKFAST")
                         {
                             SecondBreakfastProducts.Add(new Product()
                             {
@@ -177,50 +231,6 @@ namespace FOODMATE
                 Carbs = SupperProducts.Sum(item => item.ProductCarbs),
                 Fats = SupperProducts.Sum(item => item.ProductFats),
             });
-        }
-
-        public IActionResult OnPost(string BreakfastButton, string SecondBreakfastButton, string DinnerButton, string SupperButton, string Delete)
-        {
-            if (!string.IsNullOrEmpty(BreakfastButton))
-            {
-                HttpContext.Session.SetString("meal", "BREAKFAST");
-                return RedirectToPage("DietInsert");
-            }
-            if (!string.IsNullOrEmpty(SecondBreakfastButton))
-            {
-                HttpContext.Session.SetString("meal", "SECOND BREAKFAST");
-                return RedirectToPage("DietInsert");
-            }
-            if (!string.IsNullOrEmpty(DinnerButton))
-            {
-                HttpContext.Session.SetString("meal", "DINNER");
-                return RedirectToPage("DietInsert");
-            }
-            if (!string.IsNullOrEmpty(SupperButton))
-            {
-                HttpContext.Session.SetString("meal", "SUPPER");
-                return RedirectToPage("DietInsert");
-            }
-            return null;
-        }
-
-        public IActionResult OnGetDelete(int? id)
-        {
-            Console.WriteLine(id);
-            using (SqlConnection connection = new SqlConnection(_connectionString))
-            {
-                string querySelectMeals = "DELETE FROM [FOODMATE].[dbo].[Meals] WHERE meal_id = @MealID;";
-
-                using (SqlCommand command = new SqlCommand(querySelectMeals, connection))
-                {
-                    command.Parameters.AddWithValue("@MealID", id);
-
-                    connection.Open();
-                    command.ExecuteNonQuery();
-                    connection.Close();
-                    return RedirectToPage("Diet");
-                }
-            }
         }
 
         public IActionResult OnGetLogout()

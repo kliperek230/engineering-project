@@ -1,11 +1,49 @@
 ﻿@page
-@model DietModel
+@model FODMATE.DietHistoryModel
 @{
-    ViewData["Title"] = "Diet";
+    ViewData["Title"] = "DietHistory";
     Layout = "Shared/_LayoutUser";
-
 }
 <form method="post">
+    <div class="form-group row">
+        <div class="col-md-3">
+            <select class="form-control Day" name="Day">
+                @for (var x = 1; x <= 31; x++)
+                {
+                    <option>@x</option>
+                }
+            </select>
+        </div>
+        <div class="col-md-3">
+            <select class="form-control Month" name="Month">
+                <option>Styczeń</option>
+                <option>Luty</option>
+                <option>Marzec</option>
+                <option>Kwiecień</option>
+                <option>Maj</option>
+                <option>Czerwiec</option>
+                <option>Lipiec</option>
+                <option>Sierpień</option>
+                <option>Wrzesień</option>
+                <option>Październik</option>
+                <option>Listopad</option>
+                <option>Grudzień</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <select class="form-control Year" name="Year">
+                @for (var x = 2020; x >= 1901; x--)
+                {
+                    <option>@x</option>
+                }
+            </select>
+        </div>
+    </div>
+    <div class="container-login100-form-btn p-t-10">
+        <button type="submit" id="submit_btn" class="submit btn btn-info pull-right">TAK</button>
+    </div>
+</form>
+<form>
     <ul class="list-group" id="Breakfast">
         <li class="list-group-item">
             <ul class="list-group list-group-horizontal">
@@ -21,9 +59,6 @@
                         </ul>
                     </li>
                 }
-                <li class="list-group-item">
-                    <input type="submit" name="BreakfastButton" value="Add" />
-                </li>
             </ul>
         </li>
         @foreach (var product in Model.BreakfastProducts)
@@ -36,9 +71,6 @@
                     <li class="list-group-item">@product.ProductProtein</li>
                     <li class="list-group-item">@product.ProductCarbs</li>
                     <li class="list-group-item">@product.ProductFats</li>
-                    <li class="list-group-item">
-                        <a asp-page-handler="Delete" asp-route-id="@product.MealID">Usuń</a>
-                    </li>
                 </ul>
             </li>
         }
@@ -58,9 +90,6 @@
                         </ul>
                     </li>
                 }
-                <li class="list-group-item">
-                    <input type="submit" name="SecondBreakfastButton" value="Add" />
-                </li>
             </ul>
         </li>
         @foreach (var product in Model.SecondBreakfastProducts)
@@ -83,18 +112,15 @@
                 <li class="list-group-item">Obiad</li>
                 @foreach (var product in Model.DinnerSum)
                 {
-                <li class="list-group-item">
-                    <ul class="list-group list-group-horizontal">
-                        <li class="list-group-item">@product.Kcal</li>
-                        <li class="list-group-item">@product.Protein</li>
-                        <li class="list-group-item">@product.Carbs</li>
-                        <li class="list-group-item">@product.Fats</li>
-                    </ul>
-                </li>
+                    <li class="list-group-item">
+                        <ul class="list-group list-group-horizontal">
+                            <li class="list-group-item">@product.Kcal</li>
+                            <li class="list-group-item">@product.Protein</li>
+                            <li class="list-group-item">@product.Carbs</li>
+                            <li class="list-group-item">@product.Fats</li>
+                        </ul>
+                    </li>
                 }
-                <li class="list-group-item">
-                    <input type="submit" name="DinnerButton" value="Add" />
-                </li>
             </ul>
         </li>
         @foreach (var product in Model.DinnerProducts)
@@ -126,9 +152,6 @@
                         </ul>
                     </li>
                 }
-                <li class="list-group-item">
-                    <input type="submit" name="SupperButton" value="Add" />
-                </li>
             </ul>
         </li>
         @foreach (var product in Model.SupperProducts)
@@ -145,12 +168,7 @@
             </li>
         }
     </ul>
-
-    <a class=" text-dark" asp-area="" asp-page="DietHistory">Historia diety</a>
-        
 </form>
+<a class=" text-dark" asp-area="" asp-page="../HomePage">Powrót do strony głównej</a>
 
-
-
-
-
+<a class=" text-dark" asp-area="" asp-page="Diet">Powrót do rozkładu diety</a>
