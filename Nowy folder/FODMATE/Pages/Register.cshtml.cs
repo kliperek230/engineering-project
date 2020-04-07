@@ -1,16 +1,22 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using FOODMATE.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Data.SqlClient;
+using FusionCharts.Visualization;
+using FusionCharts.DataEngine;
+using System.Data;
+using System.Security.Cryptography;
 
-namespace FOODMATE.Pages.Shared
+namespace FOODMATE
 {
     public class RegisterModel : PageModel
     {
+        // KONIECZNIE TRZEBA USUN¥Æ ST¥D TAK JAWNY CONNECTION STRING!!!!!!!!!!!!!!!!!!!
+        private string _connectionString = "Server=KACPER;Database=FOODMATE;Trusted_Connection=True;";
+
         FoodmateContext db = new FoodmateContext();
 
         [BindProperty]
@@ -54,21 +60,48 @@ namespace FOODMATE.Pages.Shared
 
         public IActionResult OnPost(User user)
         {
+            //Hashing Password Algorythm
+            byte[] salt;
+            new RNGCryptoServiceProvider().GetBytes(salt = new byte[16]);
+
+            var pbkdf2 = new Rfc2898DeriveBytes(Password, salt, 10000);
+
+            byte[] hash = pbkdf2.GetBytes(20);
+            byte[] hashBytes = new byte[36];
+
+            Array.Copy(salt, 0, hashBytes, 0, 16);
+            Array.Copy(hash, 0, hashBytes, 16, 20);
+
+            string savedPasswordHash = Convert.ToBase64String(hashBytes);
+            //End of Algorythm
+
             //Checking if emails and passwords are the same
             if (Email == EmailConfirm && Password == PasswordConfirm)
             {
-                //Adding new user from form inputs and clearing them
-                db.User.Add(user);
-                db.SaveChanges();
-                //HttpContext.Session.SetString("username", Username);
-                Msg = "Poprawnie przeprowadzono rejestracjê!";
-                return RedirectToPage("Login");
+                using (SqlConnection connection = new SqlConnection(_connectionString))
+                {
+                    string query = "INSERT INTO [FOODMATE].[dbo].[User] (first_name, last_name, sex, birth_date, u_height, u_weight, email, password, username)" +
+                        " VALUES (@FirstName, @LastName, @Sex, @BirthDate, @Height, @Weight, @Email, @Password, @Username)";
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@FirstName", FirstName);
+                        command.Parameters.AddWithValue("@LastName", LastName);
+                        command.Parameters.AddWithValue("@Sex", Sex);
+                        command.Parameters.AddWithValue("@BirthDate", BirthDate);
+                        command.Parameters.AddWithValue("@Height", UHeight);
+                        command.Parameters.AddWithValue("@Weight", UWeight);
+                        command.Parameters.AddWithValue("@Email", Email);
+                        command.Parameters.AddWithValue("@Password", savedPasswordHash);
+                        command.Parameters.AddWithValue("@Username", Username);
+
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                        connection.Close();
+                    }
+                }
             }
-            else
-            {
-                Msg = "Emaile/Has³a nie zgadzaj¹ siê";
-                return Page();
-            }
+            return RedirectToPage("Login");
         }
     }
 }

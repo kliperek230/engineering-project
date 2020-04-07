@@ -107,7 +107,6 @@ namespace FOODMATE
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                //string query = "UPDATE [FOODMATE].[dbo].[Measurements] SET kcal = @Kcal, protein = @Protein, carbs = @Carbs, fats = @Fats WHERE user_id = @UserID";
                 string query = "INSERT INTO [FOODMATE].[dbo].[Measurements] (m_date, user_id, l_calve, r_calve, l_thigh, r_thigh, butt, waist, chest, " +
                     "l_arm, r_arm, l_forearm, r_forearm, u_weight) VALUES (@Date, @userID, @LeftCalve, @RightCalve, @LeftThigh, @RightThigh, @Butt, @Waist, @Chest, " +
                     "@LeftArm, @RightArm, @LeftForearm, @RightForearm, @UserWeight);";
@@ -135,7 +134,6 @@ namespace FOODMATE
                     return RedirectToPage("../HomePage");
                 }
             }
-
         }
 
         public IActionResult OnGetLogout()
