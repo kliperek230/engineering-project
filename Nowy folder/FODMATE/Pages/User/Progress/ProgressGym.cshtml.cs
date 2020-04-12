@@ -58,7 +58,13 @@ namespace FODMATE
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                string query = "SELECT value, m_date FROM [FOODMATE].[dbo].[Lifts] WHERE user_id = @userID AND lift_name = @liftName AND m_date BETWEEN @StartDate AND @EndDate;";
+                //string query = "SELECT value, m_date FROM [FOODMATE].[dbo].[Lifts] WHERE user_id = @userID AND lift_name = @liftName AND m_date BETWEEN @StartDate AND @EndDate;";
+
+                string query = "SELECT x.lift_id, x.user_id, x.m_date, x.lift_name, x.value FROM [FOODMATE].[dbo].[Lifts] x " +
+                               "JOIN(SELECT y.m_date FROM[FOODMATE].[dbo].[Lifts] y " +
+                                "WHERE y.user_id = @userID AND y.m_date BETWEEN @StartDate AND @EndDate group by m_date) z " +
+                                "ON x.user_id = @UserID AND lift_name = @liftName AND x.m_date = z.m_date;";
+
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@StartDate", StartDate);
@@ -77,7 +83,7 @@ namespace FODMATE
                     foreach (DataRow row in dt.Rows)
                     {
                         LiftList.Add(row["value"].ToString());
-                        DateList.Add(row["m_date"].ToString());
+                        DateList.Add(row["m_date"].ToString().Remove(10));
                     }
                     connection.Close();
                 }
@@ -103,26 +109,29 @@ namespace FODMATE
             // Add DataSource to the DataModel
             model.DataSources.Add(source);
 
-            Charts.LineChart lineChart = new Charts.LineChart("line_chart_db");
+            Charts.SplineChart splineChart = new Charts.SplineChart("spline_chart");
 
-            lineChart.ThemeName = FusionChartsTheme.ThemeName.FUSION;
-            lineChart.Width.Pixel(700);
-            lineChart.Height.Pixel(400);
-            lineChart.Data.Source = model;
+            splineChart.ThemeName = FusionChartsTheme.ThemeName.FUSION;
+            splineChart.Width.Pixel(700);
+            splineChart.Height.Pixel(400);
+            splineChart.Data.Source = model;
 
-            lineChart.Caption.Text = Lift;
-            lineChart.Caption.Bold = true;
+            splineChart.Caption.Text = Lift;
+            splineChart.Caption.Bold = true;
 
-            lineChart.XAxis.Text = "Czas";
-            lineChart.YAxis.Text = "kg";
+            splineChart.Values.Show = true;
 
-            lineChart.Legend.Show = false;
-            lineChart.ThemeName = FusionChartsTheme.ThemeName.FUSION;
+            splineChart.XAxis.Text = "Czas";
+            splineChart.YAxis.Text = "kg";
 
-            ViewData["Chart"] = lineChart.Render();
+            splineChart.Legend.Show = false;
+            splineChart.ThemeName = FusionChartsTheme.ThemeName.FUSION;
+
+            ViewData["Chart"] = splineChart.Render();
         }
         public IActionResult OnGetLogout()
         {
+            HttpContext.Session.Clear();
             return RedirectToPage("Login");
         }
     }

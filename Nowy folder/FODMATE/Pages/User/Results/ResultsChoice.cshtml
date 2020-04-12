@@ -5,8 +5,25 @@
     Layout = "Shared/_LayoutUser";
 }
 
-<h1>ResultsChoice</h1>
-<form asp-page="ResultsChoice" method="post">
-    <input type="submit" name="ResultsGym" value="ResultsGym" />
-    <input type="submit" name="ResultsBody" value="ResultsBody" />
-</form>
+<div class="container h-100">
+    <div class="h-50 container">
+        <div class="row h-100">
+            <div class="col align-self-end">
+                <h1 class="text-center font-italic">Zarejestruj swoje postępy!</h1>
+            </div>
+        </div>
+    </div>
+    <form method="post">
+        <div class="form-row">
+            <div class="col">
+                <input type="submit" class="btn btn-primary btn-lg form-control" name="ResultsBody" value="Ciało" />
+            </div>
+            <div class="col">
+                <input type="submit" class="btn btn-secondary btn-lg form-control" name="ResultsGym" value="Siłownia" />
+            </div>
+            <div class="col">
+                <input type="submit" class="btn btn-secondary btn-lg form-control" name="ResultsWeight" value="Waga" />
+            </div>
+        </div>
+    </form>
+</div>

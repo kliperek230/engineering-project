@@ -5,151 +5,160 @@
     Layout = "Shared/_LayoutUser";
 
 }
-<form method="post">
-    <ul class="list-group" id="Breakfast">
-        <li class="list-group-item">
-            <ul class="list-group list-group-horizontal">
-                <li class="list-group-item">Śniadanie</li>
-                @foreach (var product in Model.BreakfastSum)
-                {
-                    <li class="list-group-item">
-                        <ul class="list-group list-group-horizontal">
-                            <li class="list-group-item">@product.Kcal</li>
-                            <li class="list-group-item">@product.Protein</li>
-                            <li class="list-group-item">@product.Carbs</li>
-                            <li class="list-group-item">@product.Fats</li>
-                        </ul>
-                    </li>
-                }
-                <li class="list-group-item">
-                    <input type="submit" name="BreakfastButton" value="Add" />
-                </li>
-            </ul>
-        </li>
-        @foreach (var product in Model.BreakfastProducts)
-        {
-            <li class="list-group-item">
-                <ul class="list-group list-group-horizontal">
-                    <li class="list-group-item">@product.ProductName</li>
-                    <li class="list-group-item">@product.ProductAmmount</li>
-                    <li class="list-group-item">@product.ProductKcal</li>
-                    <li class="list-group-item">@product.ProductProtein</li>
-                    <li class="list-group-item">@product.ProductCarbs</li>
-                    <li class="list-group-item">@product.ProductFats</li>
-                    <li class="list-group-item">
-                        <a asp-page-handler="Delete" asp-route-id="@product.MealID">Usuń</a>
-                    </li>
-                </ul>
-            </li>
-        }
-    </ul>
-    <ul class="list-group" id="SecondBreakfast">
-        <li class="list-group-item">
-            <ul class="list-group list-group-horizontal">
-                <li class="list-group-item">II Śniadanie</li>
-                @foreach (var product in Model.SecondBreakfastSum)
-                {
-                    <li class="list-group-item">
-                        <ul class="list-group list-group-horizontal">
-                            <li class="list-group-item">@product.Kcal</li>
-                            <li class="list-group-item">@product.Protein</li>
-                            <li class="list-group-item">@product.Carbs</li>
-                            <li class="list-group-item">@product.Fats</li>
-                        </ul>
-                    </li>
-                }
-                <li class="list-group-item">
-                    <input type="submit" name="SecondBreakfastButton" value="Add" />
-                </li>
-            </ul>
-        </li>
-        @foreach (var product in Model.SecondBreakfastProducts)
-        {
-            <li class="list-group-item">
-                <ul class="list-group list-group-horizontal">
-                    <li class="list-group-item">@product.ProductName</li>
-                    <li class="list-group-item">@product.ProductAmmount</li>
-                    <li class="list-group-item">@product.ProductKcal</li>
-                    <li class="list-group-item">@product.ProductProtein</li>
-                    <li class="list-group-item">@product.ProductCarbs</li>
-                    <li class="list-group-item">@product.ProductFats</li>
-                </ul>
-            </li>
-        }
-    </ul>
-    <ul class="list-group" id="Dinner">
-        <li class="list-group-item">
-            <ul class="list-group list-group-horizontal">
-                <li class="list-group-item">Obiad</li>
-                @foreach (var product in Model.DinnerSum)
-                {
-                <li class="list-group-item">
-                    <ul class="list-group list-group-horizontal">
-                        <li class="list-group-item">@product.Kcal</li>
-                        <li class="list-group-item">@product.Protein</li>
-                        <li class="list-group-item">@product.Carbs</li>
-                        <li class="list-group-item">@product.Fats</li>
-                    </ul>
-                </li>
-                }
-                <li class="list-group-item">
-                    <input type="submit" name="DinnerButton" value="Add" />
-                </li>
-            </ul>
-        </li>
-        @foreach (var product in Model.DinnerProducts)
-        {
-            <li class="list-group-item">
-                <ul class="list-group list-group-horizontal">
-                    <li class="list-group-item">@product.ProductName</li>
-                    <li class="list-group-item">@product.ProductAmmount</li>
-                    <li class="list-group-item">@product.ProductKcal</li>
-                    <li class="list-group-item">@product.ProductProtein</li>
-                    <li class="list-group-item">@product.ProductCarbs</li>
-                    <li class="list-group-item">@product.ProductFats</li>
-                </ul>
-            </li>
-        }
-    </ul>
-    <ul class="list-group" id="Supper">
-        <li class="list-group-item">
-            <ul class="list-group list-group-horizontal">
-                <li class="list-group-item">Kolacja</li>
-                @foreach (var product in Model.SupperSum)
-                {
-                    <li class="list-group-item">
-                        <ul class="list-group list-group-horizontal">
-                            <li class="list-group-item">@product.Kcal</li>
-                            <li class="list-group-item">@product.Protein</li>
-                            <li class="list-group-item">@product.Carbs</li>
-                            <li class="list-group-item">@product.Fats</li>
-                        </ul>
-                    </li>
-                }
-                <li class="list-group-item">
-                    <input type="submit" name="SupperButton" value="Add" />
-                </li>
-            </ul>
-        </li>
-        @foreach (var product in Model.SupperProducts)
-        {
-            <li class="list-group-item">
-                <ul class="list-group list-group-horizontal">
-                    <li class="list-group-item">@product.ProductName</li>
-                    <li class="list-group-item">@product.ProductAmmount</li>
-                    <li class="list-group-item">@product.ProductKcal</li>
-                    <li class="list-group-item">@product.ProductProtein</li>
-                    <li class="list-group-item">@product.ProductCarbs</li>
-                    <li class="list-group-item">@product.ProductFats</li>
-                </ul>
-            </li>
-        }
-    </ul>
 
-    <a class=" text-dark" asp-area="" asp-page="DietHistory">Historia diety</a>
-        
-</form>
-
+    <div class="container d-flex flex-column">
+        <div class="form-group row justify-content-center">
+            <label class="col-sm-2 col-form-label mx-2  text-center">Kcal</label>
+            <label class="col-sm-2 col-form-label mx-2  text-center">Białko</label>
+            <label class="col-sm-2 col-form-label mx-2  text-center">Węglodowany</label>
+            <label class="col-sm-2 col-form-label mx-2 text-center">Tłuszcze</label>
+        </div>
+        <div class="form-group row justify-content-center">
+            @foreach (var sum in Model.DailySum)
+            {
+                foreach (var daily in Model.DailyRequirements)
+                {
+                    <label class="col-sm-2 col-form-label mx-2 text-center">@sum.Kcal / @daily.Kcal kcal</label>
+                    <label class="col-sm-2 col-form-label mx-2 text-center">@sum.Protein / @daily.Protein g</label>
+                    <label class="col-sm-2 col-form-label mx-2 text-center">@sum.Carbs / @daily.Carbs g</label>
+                    <label class="col-sm-2 col-form-label mx-2 text-center">@sum.Fats / @daily.Fats g</label>
+                }
+            }
+        </div>
+        <div class="form-group row justify-content-center">
+            @foreach (var progress in Model.ProgressBarType)
+            {
+                foreach (var procent in Model.DailyMacroProc)
+                {
+                    <div class="progress col-sm-2 mx-2">
+                        <div class="progress-bar @progress.Kcal_type h-50 align-self-center" role="progressbar" style="width: @procent.Kcal_proc%" aria-valuenow=@procent.Kcal_proc aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <div class="progress col-sm-2 mx-2">
+                        <div class="progress-bar @progress.Protein_type h-50 align-self-center" role="progressbar" style="width: @procent.Protein_proc%" aria-valuenow=@procent.Protein_proc aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <div class="progress col-sm-2 mx-2">
+                        <div class="progress-bar @progress.Carbs_type h-50 align-self-center" role="progressbar" style="width: @procent.Carbs_proc%" aria-valuenow=@procent.Carbs_proc aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <div class="progress col-sm-2 mx-2">
+                        <div class="progress-bar @progress.Fats_type h-50 align-self-center" role="progressbar" style="width: @procent.Fats_proc%" aria-valuenow=@procent.Fats_proc aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                }
+            }
+        </div>
+        <form method="post" class="border border-dark rounded">
+            <div class="container d-flex flex-column">
+                <div class="form-group row mt-2">
+                    <label class="col-sm-2 col-form-label mx-2">Śniadanie</label>
+                    @foreach (var product in Model.BreakfastSum)
+                    {
+                        <label class="col-sm-2 col-form-label mx-2 text-center">@product.Kcal kcal</label>
+                        <label class="col-sm-2 col-form-label mx-2 text-center">B: @product.Protein g</label>
+                        <label class="col-sm-2 col-form-label mx-2 text-center">W: @product.Carbs g</label>
+                        <label class="col-sm-2 col-form-label mx-2 text-center">T: @product.Fats g</label>
+                    }
+                    <div class="col-sm-1">
+                        <input type="submit" class="btn btn-primary btn-success form-control text-center" name="BreakfastButton" value="Dodaj" />
+                    </div>
+                </div>
+                @foreach (var product in Model.BreakfastProducts)
+                {
+                    <div class="form-group row border-bottom border-dark">
+                        <label class="col-sm-2 col-form-label mx-2 text-center">@product.ProductName</label>
+                        <label class="col-sm-1 col-form-label mx-2 text-center">@product.ProductAmmount g</label>
+                        <label class="col-sm-1 col-form-label mx-2 text-center">@product.ProductKcalPerPortion kcal</label>
+                        <label class="col-sm-2 col-form-label mx-2 text-center">B: @product.ProductProteinPerPortion g</label>
+                        <label class="col-sm-2 col-form-label mx-2 text-center">W: @product.ProductCarbsPerPortion g</label>
+                        <label class="col-sm-2 col-form-label mx-2 text-center">T: @product.ProductFatsPerPortion g</label>
+                        <a class="text-dark" asp-page-handler="Delete" asp-route-id="@product.MealID"><img src="~/img/remove_icon.png" class="icon" height="25" width="25" /></a>
+                    </div>
+                }
+            </div>
+            <div class="container d-flex flex-column">
+                <div class="form-group row mt-2">
+                    <label class="col-sm-2 col-form-label mx-2">II Śniadanie</label>
+                    @foreach (var product in Model.SecondBreakfastSum)
+                    {
+                        <label class="col-sm-2 col-form-label mx-2 text-center">@product.Kcal kcal</label>
+                        <label class="col-sm-2 col-form-label mx-2 text-center">B: @product.Protein g</label>
+                        <label class="col-sm-2 col-form-label mx-2 text-center">W: @product.Carbs g</label>
+                        <label class="col-sm-2 col-form-label mx-2 text-center">T: @product.Fats g</label>
+                    }
+                    <div class="col-sm-1">
+                        <input type="submit" class="btn btn-primary btn-success form-control text-center" name="SecondBreakfastButton" value="Dodaj" />
+                    </div>
+                </div>
+                @foreach (var product in Model.SecondBreakfastProducts)
+                {
+                    <div class="form-group row border-bottom border-dark">
+                        <label class="col-sm-2 col-form-label mx-2 text-center">@product.ProductName</label>
+                        <label class="col-sm-1 col-form-label mx-2 text-center">@product.ProductAmmount g</label>
+                        <label class="col-sm-1 col-form-label mx-2 text-center">@product.ProductKcalPerPortion kcal</label>
+                        <label class="col-sm-2 col-form-label mx-2 text-center">B: @product.ProductProteinPerPortion g</label>
+                        <label class="col-sm-2 col-form-label mx-2 text-center">W: @product.ProductCarbsPerPortion g</label>
+                        <label class="col-sm-2 col-form-label mx-2 text-center">T: @product.ProductFatsPerPortion g</label>
+                        <a class="text-dark" asp-page-handler="Delete" asp-route-id="@product.MealID"><img src="~/img/remove_icon.png" class="icon" height="25" width="25" /></a>
+                    </div>
+                }
+            </div>
+            <div class="container d-flex flex-column">
+                <div class="form-group row mt-2">
+                    <label class="col-sm-2 col-form-label mx-2">Obiad</label>
+                    @foreach (var product in Model.DinnerSum)
+                    {
+                        <label class="col-sm-2 col-form-label mx-2 text-center">@product.Kcal kcal</label>
+                        <label class="col-sm-2 col-form-label mx-2 text-center">B: @product.Protein g</label>
+                        <label class="col-sm-2 col-form-label mx-2 text-center">W: @product.Carbs g</label>
+                        <label class="col-sm-2 col-form-label mx-2 text-center">T: @product.Fats g</label>
+                    }
+                    <div class="col-sm-1">
+                        <input type="submit" class="btn btn-primary btn-success form-control text-center" name="DinnerButton" value="Dodaj" />
+                    </div>
+                </div>
+                @foreach (var product in Model.DinnerProducts)
+                {
+                    <div class="form-group row border-bottom border-dark">
+                        <label class="col-sm-2 col-form-label mx-2 text-center">@product.ProductName</label>
+                        <label class="col-sm-1 col-form-label mx-2 text-center">@product.ProductAmmount g</label>
+                        <label class="col-sm-1 col-form-label mx-2 text-center">@product.ProductKcalPerPortion kcal</label>
+                        <label class="col-sm-2 col-form-label mx-2 text-center">B: @product.ProductProteinPerPortion g</label>
+                        <label class="col-sm-2 col-form-label mx-2 text-center">W: @product.ProductCarbsPerPortion g</label>
+                        <label class="col-sm-2 col-form-label mx-2 text-center">T: @product.ProductFatsPerPortion g</label>
+                        <a class="text-dark" asp-page-handler="Delete" asp-route-id="@product.MealID"><img src="~/img/remove_icon.png" class="icon" height="25" width="25" /></a>
+                    </div>
+                }
+            </div>
+            <div class="container d-flex flex-column">
+                <div class="form-group row mt-2">
+                    <label class="col-sm-2 col-form-label mx-2">Kolacja</label>
+                    @foreach (var product in Model.SupperSum)
+                    {
+                        <label class="col-sm-2 col-form-label mx-2 text-center">@product.Kcal kcal</label>
+                        <label class="col-sm-2 col-form-label mx-2 text-center">B: @product.Protein g</label>
+                        <label class="col-sm-2 col-form-label mx-2 text-center">W: @product.Carbs g</label>
+                        <label class="col-sm-2 col-form-label mx-2 text-center">T: @product.Fats g</label>
+                    }
+                    <div class="col-sm-1">
+                        <input type="submit" class="btn btn-primary btn-success form-control text-center" name="SupperButton" value="Dodaj" />
+                    </div>
+                </div>
+                @foreach (var product in Model.SupperProducts)
+                {
+                    <div class="form-group row border-bottom border-dark">
+                        <label class="col-sm-2 col-form-label mx-2 text-center">@product.ProductName</label>
+                        <label class="col-sm-1 col-form-label mx-2 text-center">@product.ProductAmmount g</label>
+                        <label class="col-sm-1 col-form-label mx-2 text-center">@product.ProductKcalPerPortion kcal</label>
+                        <label class="col-sm-2 col-form-label mx-2 text-center">B: @product.ProductProteinPerPortion g</label>
+                        <label class="col-sm-2 col-form-label mx-2 text-center">W: @product.ProductCarbsPerPortion g</label>
+                        <label class="col-sm-2 col-form-label mx-2 text-center">T: @product.ProductFatsPerPortion g</label>
+                        <a class="text-dark" asp-page-handler="Delete" asp-route-id="@product.MealID"><img src="~/img/remove_icon.png" class="icon" height="25" width="25" /></a>
+                    </div>
+                }
+            </div>
+        </form>
+        <div class="form-group row justify-content-center">
+            <a class=" text-dark" asp-area="" asp-page="DietHistory"><img src="~/img/calendar_icon.jpg" class="icon" height="100" width="150" /></a>
+        </div>
+    </div>
 
 
 

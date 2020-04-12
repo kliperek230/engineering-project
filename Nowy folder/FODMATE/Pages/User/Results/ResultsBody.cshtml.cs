@@ -32,7 +32,7 @@ namespace FOODMATE
         public int rightArm { get; set; }
         public int leftForearm { get; set; }
         public int rightForearm { get; set; }
-        public int userWeight { get; set; }
+        public decimal userWeight { get; set; }
 
         public void OnGet()
         {
@@ -68,7 +68,7 @@ namespace FOODMATE
                             rightArm = Convert.ToInt32((dr["r_arm"]));
                             leftForearm = Convert.ToInt32((dr["l_forearm"]));
                             rightForearm = Convert.ToInt32((dr["r_forearm"]));
-                            userWeight = Convert.ToInt32((dr["u_weight"]));
+                            userWeight = Convert.ToDecimal((dr["u_weight"]));
                         }
                     }
                     connection.Close();
@@ -101,7 +101,7 @@ namespace FOODMATE
             int RightArm = int.Parse(Request.Form["RightArm"]);
             int LeftForearm = int.Parse(Request.Form["LeftForearm"]);
             int RightForearm = int.Parse(Request.Form["RightForearm"]);
-            int UserWeight = int.Parse(Request.Form["UserWeight"]);
+            decimal UserWeight = decimal.Parse(Request.Form["UserWeight"]);
 
 
 
@@ -138,6 +138,7 @@ namespace FOODMATE
 
         public IActionResult OnGetLogout()
         {
+            HttpContext.Session.Clear();
             return RedirectToPage("../Login");
         }
     }

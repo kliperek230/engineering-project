@@ -24,9 +24,6 @@ namespace FOODMATE
             services.AddDbContext<FoodmateContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionString")));
 
-            
-            
-
             services.AddSession(options =>
             {
                 options.Cookie.Name = ".FoodMate.Session";
@@ -34,10 +31,15 @@ namespace FOODMATE
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });
-            //services.AddDistributedMemoryCache();
+
             services.AddMemoryCache();
-            //services.AddHttpContextAccessor();
-            services.AddRazorPages();
+
+            services.AddRazorPages(
+            //options => 
+            //{
+            //    options.Conventions.AuthorizeFolder("/User");
+            //}
+            );
 
             services.AddMvc(option => option.EnableEndpointRouting = false);
         }

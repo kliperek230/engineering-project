@@ -65,7 +65,11 @@ namespace FOODMATE
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                string query = "SELECT * FROM [FOODMATE].[dbo].[Measurements] WHERE user_id = @userID AND m_date BETWEEN @StartDate AND @EndDate;";
+                string query = "SELECT x.measurement_id, x.m_date, x.user_id, x.l_calve, x.r_calve, x.l_thigh, x.r_thigh, x.butt, x.waist, x.chest, x.l_arm, x.r_arm, x.l_forearm, x.r_forearm, x.u_weight FROM[FOODMATE].[dbo].[Measurements] x " +
+                                "JOIN(SELECT y.m_date FROM [FOODMATE].[dbo].[Measurements] y " +
+                                "WHERE y.user_id = @UserID AND y.m_date BETWEEN @StartDate AND @EndDate group by m_date) z " +
+                                "ON x.user_id = @UserID AND x.m_date = z.m_date;";
+
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@StartDate", StartDate);
@@ -83,9 +87,19 @@ namespace FOODMATE
                     foreach (DataRow row in dt.Rows)
                     {
                         BodyPartList.Add(row[BodyPartQuery].ToString());
-                        DateList.Add(row["m_date"].ToString());
+                        DateList.Add(row["m_date"].ToString().Remove(10));
                     }
                     connection.Close();
+                }
+            }
+
+            for(int j = 0; j <= BodyPartList.Count - 1; j++)
+            {
+                if(BodyPartList[j] == ""){
+
+                    BodyPartList[j] = BodyPartList[j - 1];
+                    Console.WriteLine(DateList[j]);
+                    Console.WriteLine(BodyPartList[j]);
                 }
             }
 
@@ -109,26 +123,29 @@ namespace FOODMATE
             // Add DataSource to the DataModel
             model.DataSources.Add(source);
 
-            Charts.LineChart lineChart = new Charts.LineChart("line_chart_db");
+            Charts.SplineChart splineChart = new Charts.SplineChart("spline_chart");
 
-            lineChart.ThemeName = FusionChartsTheme.ThemeName.FUSION;
-            lineChart.Width.Pixel(700);
-            lineChart.Height.Pixel(400);
-            lineChart.Data.Source = model;
+            splineChart.ThemeName = FusionChartsTheme.ThemeName.FUSION;
+            splineChart.Width.Pixel(700);
+            splineChart.Height.Pixel(400);
+            splineChart.Data.Source = model;
 
-            lineChart.Caption.Text = BodyPart;
-            lineChart.Caption.Bold = true;
+            splineChart.Caption.Text = BodyPart;
+            splineChart.Caption.Bold = true;
 
-            lineChart.XAxis.Text = "Czas";
-            lineChart.YAxis.Text = "cm";
+            splineChart.Values.Show = true;
 
-            lineChart.Legend.Show = false;
-            lineChart.ThemeName = FusionChartsTheme.ThemeName.FUSION;
+            splineChart.XAxis.Text = "Czas";
+            splineChart.YAxis.Text = "cm";
 
-            ViewData["Chart"] = lineChart.Render();
+            splineChart.Legend.Show = false;
+            splineChart.ThemeName = FusionChartsTheme.ThemeName.FUSION;
+
+            ViewData["Chart"] = splineChart.Render();
         }
         public IActionResult OnGetLogout()
         {
+            HttpContext.Session.Clear();
             return RedirectToPage("Login");
         }
     }

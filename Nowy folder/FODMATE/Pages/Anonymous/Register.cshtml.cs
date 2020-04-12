@@ -29,9 +29,6 @@ namespace FOODMATE
         public string Sex { get; set; }
 
         [BindProperty]
-        public string BirthDate { get; set; }
-
-        [BindProperty]
         public string UHeight { get; set; }
 
         [BindProperty]
@@ -60,6 +57,31 @@ namespace FOODMATE
 
         public IActionResult OnPost(User user)
         {
+            var MonthList = new List<string>() { "Styczeñ", "Luty", "Marzec", "Kwiecieñ", "Maj", "Czerwiec", "Lipiec", "Sierpieñ", "Wrzesieñ", "PaŸdziernik", "Listopad", "Grudzieñ" };
+
+            int Day = int.Parse(Request.Form["Day"]);
+            string Month = Request.Form["Month"].ToString();
+            int Year = int.Parse(Request.Form["Year"]);
+            int MonthValue = MonthList.IndexOf(Month) + 1;
+            string Date = Year + "-" + MonthValue + "-" + Day;
+
+            if (FirstName == null ||
+                LastName == null ||
+                Sex == null ||
+                UHeight == null ||
+                UWeight == null ||
+                Username == null ||
+                Email == null ||
+                EmailConfirm == null ||
+                Password == null ||
+                PasswordConfirm == null)
+            {
+                Msg = "Proszê uzupe³niæ wszystkie kolumny";
+                return null;
+            }
+
+
+
             //Hashing Password Algorythm
             byte[] salt;
             new RNGCryptoServiceProvider().GetBytes(salt = new byte[16]);
@@ -76,19 +98,63 @@ namespace FOODMATE
             //End of Algorythm
 
             //Checking if emails and passwords are the same
+
+            List<string> EmailList;
+            List<string> UsernameList;
+
             if (Email == EmailConfirm && Password == PasswordConfirm)
             {
                 using (SqlConnection connection = new SqlConnection(_connectionString))
                 {
-                    string query = "INSERT INTO [FOODMATE].[dbo].[User] (first_name, last_name, sex, birth_date, u_height, u_weight, email, password, username)" +
+                    string queryCheckInformations = "SELECT email, username FROM [FOODMATE].[dbo].[User]";
+                    using (SqlCommand command = new SqlCommand(queryCheckInformations, connection))
+                    {
+                        connection.Open();
+
+                        EmailList = new List<string>();
+                        UsernameList = new List<string>();
+
+                        DataTable dt = new DataTable();
+                        SqlDataAdapter adapter = new SqlDataAdapter(command);
+                        adapter.Fill(dt);
+                        foreach (DataRow row in dt.Rows)
+                        {
+                            EmailList.Add(row["email"].ToString());
+                            UsernameList.Add(row["username"].ToString());
+                        }
+                        connection.Close();
+                    }
+
+                    for(int i = 0; i <= (EmailList.Count -1 ); i++)
+                    {
+                        if (Email != EmailList[i])
+                        {
+                            if (Username != UsernameList[i])
+                            {
+
+                            }
+                            else
+                            {
+                                Msg = "U¿ytkownik o takiej nazwie ju¿ istnieje";
+                                return null;
+                            }
+                        }
+                        else
+                        {
+                            Msg = "Podany adres email zosta³ ju¿ u¿yty do rejestracji w serwisie";
+                            return null;
+                        }
+                    }
+
+                    string queryInsertUser = "INSERT INTO [FOODMATE].[dbo].[User] (first_name, last_name, sex, birth_date, u_height, u_weight, email, password, username)" +
                         " VALUES (@FirstName, @LastName, @Sex, @BirthDate, @Height, @Weight, @Email, @Password, @Username)";
 
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlCommand command = new SqlCommand(queryInsertUser, connection))
                     {
                         command.Parameters.AddWithValue("@FirstName", FirstName);
                         command.Parameters.AddWithValue("@LastName", LastName);
                         command.Parameters.AddWithValue("@Sex", Sex);
-                        command.Parameters.AddWithValue("@BirthDate", BirthDate);
+                        command.Parameters.AddWithValue("@BirthDate", Date);
                         command.Parameters.AddWithValue("@Height", UHeight);
                         command.Parameters.AddWithValue("@Weight", UWeight);
                         command.Parameters.AddWithValue("@Email", Email);

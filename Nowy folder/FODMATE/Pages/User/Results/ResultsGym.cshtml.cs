@@ -166,6 +166,7 @@ namespace FOODMATE
 
         public IActionResult OnGetLogout()
         {
+            HttpContext.Session.Clear();
             return RedirectToPage("../Login");
         }
     }

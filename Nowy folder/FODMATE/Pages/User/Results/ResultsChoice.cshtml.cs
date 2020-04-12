@@ -13,7 +13,7 @@ namespace FODMATE
         {
 
         }
-        public IActionResult OnPost(string ResultsGym, string ResultsBody)
+        public IActionResult OnPost(string ResultsGym, string ResultsBody, string ResultsWeight)
         {
             if (!string.IsNullOrEmpty(ResultsGym))
             {
@@ -23,11 +23,16 @@ namespace FODMATE
             {
                 return RedirectToPage("ResultsBody");
             }
+            if (!string.IsNullOrEmpty(ResultsWeight))
+            {
+                return RedirectToPage("ResultsWeight");
+            }
             return null;
         }
 
         public IActionResult OnGetLogout()
         {
+            HttpContext.Session.Clear();
             return RedirectToPage("Login");
         }
     }

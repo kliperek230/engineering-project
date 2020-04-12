@@ -5,30 +5,31 @@
     Layout = "Shared/_LayoutUser";
 }
 
-<!DOCTYPE html>
+    <div class="d-flex flex-column justify-content-center container vh-100">
+        <div>
+            <h1 class="text-center font-italic justify-content-center">Witaj <span class="font-weight-bolder">@Model.username</span></h1>
+        </div>
+        <div class="container">
+            <div class="row m-5 justify-content-around">
+                <div class="col-3 d-flex flex-column border border-primary rounded-lg bg-primary">
+                    <div class="align-self-center"><a class="text-dark" asp-area="" asp-page="Calculator/Calculator"><img src="~/img/calculator-icon.png" class="icon" height="100" width="100" /></a></div>
+                    <div class="align-self-center"><span class="font-weight-bolder text-white">Kalkulator</span></div>
+                </div>
+                <div class="col-3 d-flex flex-column border border-success rounded-lg bg-success">
+                    <div class="align-self-center"><a class="text-dark" asp-area="" asp-page="Diet/Diet"><img src="~/img/diet-icon.png" class="icon" height="100" width="100" /></a></div>
+                    <div class="align-self-center"><span class="font-weight-bolder text-white">Dieta</span></div>
+                </div>
+            </div>
+            <div class="row m-5 justify-content-around">
+                <div class="col-3 d-flex flex-column border border-danger rounded-lg bg-danger">
+                    <div class="align-self-center"><a class="text-dark" asp-area="" asp-page="Progress/ProgressChoice"><img src="~/img/progress-icon.png" class="icon" height="100" width="100" /></a></div>
+                    <div class="align-self-center"><span class="font-weight-bolder text-white">Postęp</span></div>
+                </div>
+                <div class="col-3 d-flex flex-column border border-warning rounded-lg bg-warning">
+                    <div class="align-self-center"><a class="text-dark" asp-area="" asp-page="Results/ResultsChoice"><img src="~/img/centimeter.svg" class="icon" height="100" width="100" /></a></div>
+                    <div class="align-self-center"><span class="font-weight-bolder">Rezultaty</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Welcome</title>
-</head>
-<body>
-    <h1>Welcome user with ID: @Model.userID</h1>
-
-    <ul class="navbar-nav flex-grow-1">
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-page="Calculator">Calculator</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-page="Diet/Diet">Diet</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-page="Progress/ProgressChoice">Progress</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-page="Results/ResultsChoice">Results</a>
-        </li>
-    </ul>
-
-</body>
-</html>

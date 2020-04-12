@@ -24,20 +24,42 @@ namespace FOODMATE
             public string ProductName { get; set; }
             public int ProductAmmount { get; set; }
             public int ProductKcal { get; set; }
-            public double ProductProtein { get; set; }
-            public double ProductCarbs { get; set; }
-            public double ProductFats { get; set; }
+            public decimal ProductProtein { get; set; }
+            public decimal ProductCarbs { get; set; }
+            public decimal ProductFats { get; set; }
             public string Meal { get; set; }
+            public int ProductKcalPerPortion { get; set; }
+            public decimal ProductProteinPerPortion { get; set; }
+            public decimal ProductCarbsPerPortion { get; set; }
+            public decimal ProductFatsPerPortion { get; set; }
         }
 
         public class ProductMacroSum
         {
             public int Kcal { get; set; }
-            public double Protein { get; set; }
-            public double Carbs { get; set; }
-            public double Fats { get; set; }
+            public decimal Protein { get; set; }
+            public decimal Carbs { get; set; }
+            public decimal Fats { get; set; }
         }
 
+        public class DailyMacroIntake
+        {
+            public int Kcal_proc { get; set; }
+            public int Protein_proc { get; set; }
+            public int Carbs_proc { get; set; }
+            public int Fats_proc { get; set; }
+        }
+
+        public class MacroProcent
+        {
+            public string Kcal_type { get; set; }
+            public string Protein_type { get; set; }
+            public string Carbs_type { get; set; }
+            public string Fats_type { get; set; }
+        }
+
+        public List<ProductMacroSum> DailyRequirements { get; set; }
+        public List<ProductMacroSum> DailySum { get; set; }
         public List<Product> BreakfastProducts { get; set; }
         public List<ProductMacroSum> BreakfastSum { get; set; }
         public List<Product> SecondBreakfastProducts { get; set; }
@@ -46,7 +68,8 @@ namespace FOODMATE
         public List<Product> DinnerProducts { get; set; }
         public List<ProductMacroSum> SupperSum { get; set; }
         public List<Product> SupperProducts { get; set; }
-
+        public List<DailyMacroIntake> DailyMacroProc { get; set; }
+        public List<MacroProcent> ProgressBarType { get; set; }
 
         public void OnGet()
         {
@@ -87,10 +110,14 @@ namespace FOODMATE
                                 ProductName = row["product_name_pl"].ToString(),
                                 ProductAmmount = Convert.ToInt32(row["ammount"]),
                                 ProductKcal = Convert.ToInt32(row["kcal"]),
-                                ProductProtein = Convert.ToDouble(row["protein"]),
-                                ProductCarbs = Convert.ToDouble(row["carbs"]),
-                                ProductFats = Convert.ToDouble(row["fats"]),
-                                Meal = row["meal"].ToString()
+                                ProductProtein = Convert.ToDecimal(row["protein"]),
+                                ProductCarbs = Convert.ToDecimal(row["carbs"]),
+                                ProductFats = Convert.ToDecimal(row["fats"]),
+                                Meal = row["meal"].ToString(),
+                                ProductKcalPerPortion = ((Convert.ToInt32(row["kcal"]) * Convert.ToInt32(row["ammount"])) / 100),
+                                ProductProteinPerPortion = ((Convert.ToDecimal(row["protein"]) * Convert.ToInt32(row["ammount"])) / 100),
+                                ProductCarbsPerPortion = ((Convert.ToDecimal(row["carbs"]) * Convert.ToInt32(row["ammount"])) / 100),
+                                ProductFatsPerPortion = ((Convert.ToDecimal(row["fats"]) * Convert.ToInt32(row["ammount"])) / 100)
                             });
                         } else if (row["meal"].ToString() == "SECOND BREAKFAST")
                         {
@@ -101,10 +128,14 @@ namespace FOODMATE
                                 ProductName = row["product_name_pl"].ToString(),
                                 ProductAmmount = Convert.ToInt32(row["ammount"]),
                                 ProductKcal = Convert.ToInt32(row["kcal"]),
-                                ProductProtein = Convert.ToDouble(row["protein"]),
-                                ProductCarbs = Convert.ToDouble(row["carbs"]),
-                                ProductFats = Convert.ToDouble(row["fats"]),
-                                Meal = row["meal"].ToString()
+                                ProductProtein = Convert.ToDecimal(row["protein"]),
+                                ProductCarbs = Convert.ToDecimal(row["carbs"]),
+                                ProductFats = Convert.ToDecimal(row["fats"]),
+                                Meal = row["meal"].ToString(),
+                                ProductKcalPerPortion = ((Convert.ToInt32(row["kcal"]) * Convert.ToInt32(row["ammount"])) / 100),
+                                ProductProteinPerPortion = ((Convert.ToDecimal(row["protein"]) * Convert.ToInt32(row["ammount"])) / 100),
+                                ProductCarbsPerPortion = ((Convert.ToDecimal(row["carbs"]) * Convert.ToInt32(row["ammount"])) / 100),
+                                ProductFatsPerPortion = ((Convert.ToDecimal(row["fats"]) * Convert.ToInt32(row["ammount"])) / 100)
                             });
                         }
                         else if (row["meal"].ToString() == "DINNER")
@@ -116,10 +147,14 @@ namespace FOODMATE
                                 ProductName = row["product_name_pl"].ToString(),
                                 ProductAmmount = Convert.ToInt32(row["ammount"]),
                                 ProductKcal = Convert.ToInt32(row["kcal"]),
-                                ProductProtein = Convert.ToDouble(row["protein"]),
-                                ProductCarbs = Convert.ToDouble(row["carbs"]),
-                                ProductFats = Convert.ToDouble(row["fats"]),
-                                Meal = row["meal"].ToString()
+                                ProductProtein = Convert.ToDecimal(row["protein"]),
+                                ProductCarbs = Convert.ToDecimal(row["carbs"]),
+                                ProductFats = Convert.ToDecimal(row["fats"]),
+                                Meal = row["meal"].ToString(),
+                                ProductKcalPerPortion = ((Convert.ToInt32(row["kcal"]) * Convert.ToInt32(row["ammount"])) / 100),
+                                ProductProteinPerPortion = ((Convert.ToDecimal(row["protein"]) * Convert.ToInt32(row["ammount"])) / 100),
+                                ProductCarbsPerPortion = ((Convert.ToDecimal(row["carbs"]) * Convert.ToInt32(row["ammount"])) / 100),
+                                ProductFatsPerPortion = ((Convert.ToDecimal(row["fats"]) * Convert.ToInt32(row["ammount"])) / 100)
                             });
                         }
                         else if (row["meal"].ToString() == "SUPPER")
@@ -131,10 +166,40 @@ namespace FOODMATE
                                 ProductName = row["product_name_pl"].ToString(),
                                 ProductAmmount = Convert.ToInt32(row["ammount"]),
                                 ProductKcal = Convert.ToInt32(row["kcal"]),
-                                ProductProtein = Convert.ToDouble(row["protein"]),
-                                ProductCarbs = Convert.ToDouble(row["carbs"]),
-                                ProductFats = Convert.ToDouble(row["fats"]),
-                                Meal = row["meal"].ToString()
+                                ProductProtein = Convert.ToDecimal(row["protein"]),
+                                ProductCarbs = Convert.ToDecimal(row["carbs"]),
+                                ProductFats = Convert.ToDecimal(row["fats"]),
+                                Meal = row["meal"].ToString(),
+                                ProductKcalPerPortion = ((Convert.ToInt32(row["kcal"]) * Convert.ToInt32(row["ammount"])) / 100),
+                                ProductProteinPerPortion = ((Convert.ToDecimal(row["protein"]) * Convert.ToInt32(row["ammount"])) / 100),
+                                ProductCarbsPerPortion = ((Convert.ToDecimal(row["carbs"]) * Convert.ToInt32(row["ammount"])) / 100),
+                                ProductFatsPerPortion = ((Convert.ToDecimal(row["fats"]) * Convert.ToInt32(row["ammount"])) / 100)
+                            });
+                        }
+                    }
+                    connection.Close();
+                }
+
+                string querySelectDailyMacro = "SELECT kcal, protein, carbs, fats FROM [FOODMATE].[dbo].[User] WHERE user_id = @UserID";
+
+                using (SqlCommand command = new SqlCommand(querySelectDailyMacro, connection))
+                {
+                    command.Parameters.AddWithValue("@userID", userID);
+
+                    DailyRequirements = new List<ProductMacroSum>();
+
+                    connection.Open();
+
+                    using (SqlDataReader dr = command.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            DailyRequirements.Add(new ProductMacroSum()
+                            {
+                                Kcal = Convert.ToInt32((dr["kcal"])),
+                                Protein = Convert.ToInt32((dr["protein"])),
+                                Carbs = Convert.ToInt32((dr["carbs"])),
+                                Fats = Convert.ToInt32((dr["fats"]))
                             });
                         }
                     }
@@ -145,7 +210,7 @@ namespace FOODMATE
             BreakfastSum = new List<ProductMacroSum>();
             BreakfastSum.Add(new ProductMacroSum()
             {
-                Kcal = BreakfastProducts.Sum(item => item.ProductKcal),
+                Kcal = BreakfastProducts.Sum(item => item.ProductKcalPerPortion),
                 Protein = BreakfastProducts.Sum(item => item.ProductProtein),
                 Carbs = BreakfastProducts.Sum(item => item.ProductCarbs),
                 Fats = BreakfastProducts.Sum(item => item.ProductFats),
@@ -154,29 +219,141 @@ namespace FOODMATE
             SecondBreakfastSum = new List<ProductMacroSum>();
             SecondBreakfastSum.Add(new ProductMacroSum()
             {
-                Kcal = SecondBreakfastProducts.Sum(item => item.ProductKcal),
-                Protein = SecondBreakfastProducts.Sum(item => item.ProductProtein),
-                Carbs = SecondBreakfastProducts.Sum(item => item.ProductCarbs),
-                Fats = SecondBreakfastProducts.Sum(item => item.ProductFats),
+                Kcal = SecondBreakfastProducts.Sum(item => item.ProductKcalPerPortion),
+                Protein = SecondBreakfastProducts.Sum(item => item.ProductProteinPerPortion),
+                Carbs = SecondBreakfastProducts.Sum(item => item.ProductCarbsPerPortion),
+                Fats = SecondBreakfastProducts.Sum(item => item.ProductFatsPerPortion),
             });
 
             DinnerSum = new List<ProductMacroSum>();
             DinnerSum.Add(new ProductMacroSum()
             {
-                Kcal = DinnerProducts.Sum(item => item.ProductKcal),
-                Protein = DinnerProducts.Sum(item => item.ProductProtein),
-                Carbs = DinnerProducts.Sum(item => item.ProductCarbs),
-                Fats = DinnerProducts.Sum(item => item.ProductFats),
+                Kcal = DinnerProducts.Sum(item => item.ProductKcalPerPortion),
+                Protein = DinnerProducts.Sum(item => item.ProductProteinPerPortion),
+                Carbs = DinnerProducts.Sum(item => item.ProductCarbsPerPortion),
+                Fats = DinnerProducts.Sum(item => item.ProductFatsPerPortion),
             });
 
             SupperSum = new List<ProductMacroSum>();
             SupperSum.Add(new ProductMacroSum()
             {
-                Kcal = SupperProducts.Sum(item => item.ProductKcal),
-                Protein = SupperProducts.Sum(item => item.ProductProtein),
-                Carbs = SupperProducts.Sum(item => item.ProductCarbs),
-                Fats = SupperProducts.Sum(item => item.ProductFats),
+                Kcal = SupperProducts.Sum(item => item.ProductKcalPerPortion),
+                Protein = SupperProducts.Sum(item => item.ProductProteinPerPortion),
+                Carbs = SupperProducts.Sum(item => item.ProductCarbsPerPortion),
+                Fats = SupperProducts.Sum(item => item.ProductFatsPerPortion),
             });
+
+            DailySum = new List<ProductMacroSum>();
+            DailySum.Add(new ProductMacroSum()
+            {
+                Kcal = BreakfastProducts.Sum(item => item.ProductKcalPerPortion) + SecondBreakfastProducts.Sum(item => item.ProductKcalPerPortion) + DinnerProducts.Sum(item => item.ProductKcalPerPortion) + SupperProducts.Sum(item => item.ProductKcalPerPortion),
+                Protein = BreakfastProducts.Sum(item => item.ProductProteinPerPortion) + SecondBreakfastProducts.Sum(item => item.ProductProteinPerPortion) + DinnerProducts.Sum(item => item.ProductProteinPerPortion) + SupperProducts.Sum(item => item.ProductProteinPerPortion),
+                Carbs = BreakfastProducts.Sum(item => item.ProductCarbsPerPortion) + SecondBreakfastProducts.Sum(item => item.ProductCarbsPerPortion) + DinnerProducts.Sum(item => item.ProductCarbsPerPortion) + SupperProducts.Sum(item => item.ProductCarbsPerPortion),
+                Fats = BreakfastProducts.Sum(item => item.ProductFatsPerPortion) + SecondBreakfastProducts.Sum(item => item.ProductFatsPerPortion) + DinnerProducts.Sum(item => item.ProductFatsPerPortion) + SupperProducts.Sum(item => item.ProductFatsPerPortion),
+            });
+
+            var ProgressBarList = new List<string>() { "bg-danger", "bg-warning", "bg-info", "bg-success" };
+
+            foreach (var req in DailyRequirements)
+            {
+                foreach(var daily in DailySum)
+                {
+                    DailyMacroProc = new List<DailyMacroIntake>();
+                    DailyMacroProc.Add(new DailyMacroIntake()
+                    {
+                        Kcal_proc = (daily.Kcal * 100 / req.Kcal),
+                        Protein_proc = (Convert.ToInt32(daily.Protein) * 100 / Convert.ToInt32(req.Protein)),
+                        Carbs_proc = (Convert.ToInt32(daily.Carbs) * 100 / Convert.ToInt32(req.Carbs)),
+                        Fats_proc = (Convert.ToInt32(daily.Fats) * 100 / Convert.ToInt32(req.Fats)),
+                    });
+                }
+            }
+
+            foreach(var proc in DailyMacroProc)
+            {
+                string kcal_type = "";
+                string protein_type = "";
+                string carbs_type = "";
+                string fats_type = "";
+
+                if(proc.Kcal_proc <= 25)
+                {
+                    kcal_type = ProgressBarList[0];
+                }
+                else if(proc.Kcal_proc <= 50)
+                {
+                    kcal_type = ProgressBarList[1];
+                }
+                else if (proc.Kcal_proc <= 75)
+                {
+                    kcal_type = ProgressBarList[2];
+                }
+                else
+                {
+                    kcal_type = ProgressBarList[3];
+                }
+
+                if (proc.Protein_proc <= 25)
+                {
+                    protein_type = ProgressBarList[0];
+                }
+                else if (proc.Protein_proc <= 50)
+                {
+                    protein_type = ProgressBarList[1];
+                }
+                else if (proc.Protein_proc <= 75)
+                {
+                    protein_type = ProgressBarList[2];
+                }
+                else
+                {
+                    protein_type = ProgressBarList[3];
+                }
+
+                if (proc.Carbs_proc <= 25)
+                {
+                    carbs_type = ProgressBarList[0];
+                }
+                else if (proc.Carbs_proc <= 50)
+                {
+                    carbs_type = ProgressBarList[1];
+                }
+                else if (proc.Carbs_proc <= 75)
+                {
+                    carbs_type = ProgressBarList[2];
+                }
+                else
+                {
+                    carbs_type = ProgressBarList[3];
+                }
+
+                if (proc.Fats_proc <= 25)
+                {
+                    fats_type = ProgressBarList[0];
+                }
+                else if (proc.Fats_proc <= 50)
+                {
+                    fats_type = ProgressBarList[1];
+                }
+                else if (proc.Fats_proc <= 75)
+                {
+                    fats_type = ProgressBarList[2];
+                }
+                else
+                {
+                    fats_type = ProgressBarList[3];
+                }
+
+
+                ProgressBarType = new List<MacroProcent>();
+                ProgressBarType.Add(new MacroProcent()
+                {
+                    Kcal_type = kcal_type,
+                    Protein_type = protein_type,
+                    Carbs_type = carbs_type,
+                    Fats_type = fats_type
+                });
+            }
         }
 
         public IActionResult OnPost(string BreakfastButton, string SecondBreakfastButton, string DinnerButton, string SupperButton, string Delete)
@@ -204,6 +381,7 @@ namespace FOODMATE
             return null;
         }
 
+
         public IActionResult OnGetDelete(int? id)
         {
             Console.WriteLine(id);
@@ -225,6 +403,7 @@ namespace FOODMATE
 
         public IActionResult OnGetLogout()
         {
+            HttpContext.Session.Clear();
             return RedirectToPage("../Login");
         }
     }

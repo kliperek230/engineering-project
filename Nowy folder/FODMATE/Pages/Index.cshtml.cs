@@ -18,11 +18,11 @@ namespace FOODMATE
         {
             if (!string.IsNullOrEmpty(Login))
             {
-                return RedirectToPage("Login");
+                return RedirectToPage("Anonymous/Login");
             }
             if (!string.IsNullOrEmpty(Register))
             {
-                return RedirectToPage("Register");
+                return RedirectToPage("Anonymous/Register");
             }
             return null;
         }

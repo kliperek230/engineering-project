@@ -4,9 +4,24 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Dzięki nam staniesz się lepszą wersją siebie!</h1>
-<form asp-page="Index" method="post">
-    <input type="submit" name="Login" value="Login" />
-    <input type="submit" name="Register" value="Register" />
-</form>
+    <div class="container h-100">
+        <div class="h-50 container">
+            <div class="row h-100">
+                <div class="col align-self-end">
+                    <h1 class="text-center font-italic">Dzięki nam staniesz się lepszą wersją siebie!</h1>
+                </div>
+            </div>
+        </div>
+        <form method="post">
+            <div class="form-row">
+                <div class="col">
+                    <input type="submit" class="btn btn-primary btn-lg form-control" name="Login" value="Login" />
+                </div>
+                <div class="col">
+                    <input type="submit" class="btn btn-secondary btn-lg form-control" name="Register" value="Register" />
+                </div>
+            </div>
+        </form>
+    </div>
+
 

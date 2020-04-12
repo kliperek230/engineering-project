@@ -13,81 +13,78 @@
     <title>Welcome</title>
 </head>
 <body>
-    <div class="d-flex flex-row">
-        <div class="p-2 w-50">
+    <div class="container d-flex flex-row">
+        <div class="col-6">
             <form>
-                <div class="form-group">
-                    <label id="Sex">Płeć</label>
-                    <select class="form-control Sex">
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Płeć</label>
+                    <select class="custom-select col-sm-3 form-control Sex">
                         <option>Kobieta</option>
                         <option>Mężczyzna</option>
                     </select>
                 </div>
-                <div class="form-group">
-                    <label id="Age">Wiek</label>
-                    <input type="text" class="form-control Age" placeholder="Twój wiek" />
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Wiek</label>
+                    <input type="text" class="col-sm-3 form-control Age" placeholder="Twój wiek" />
                 </div>
-                <div class="form-group">
-                    <label id="Height">Wzrost</label>
-                    <input type="text" class="form-control Height" value=@Model.userHeight />
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Wzrost</label>
+                    <input type="text" class="col-sm-3 form-control Height" value=@Model.userHeight />
                 </div>
-                <div class="form-group">
-                    <label id="Weight">Waga</label>
-                    <input type="text" class="form-control Weight" value=@Model.userWeight />
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Waga</label>
+                    <input type="text" class="col-sm-3 form-control Weight" value=@Model.userWeight />
                 </div>
-                <div class="form-group">
-                    <label id="Activity">Aktywność fizyczna</label>
-                    <select class="form-control Activity">
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Aktywność</label>
+                    <select class="custom-select col-sm-6 form-control Activity">
                         <option>Brak aktywności, praca siedząca</option>
                         <option>Niska aktywność, praca siedząca i 1/2 treningi w tygodniu</option>
                         <option>Średnia aktywność, praca siedząca i 3/4 treningi w tygodniu</option>
                         <option>Wysoka aktywność, praca fizyczna i 3/4 treningi w tygodniu</option>
                     </select>
                 </div>
-                <div class="form-group">
-                    <label id="Goal">Cel</label>
-                    <select class="form-control Goal">
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Cel</label>
+                    <select class="custom-select col-sm-4 form-control Goal">
                         <option>Utrzymanie wagi</option>
                         <option>Zwiększenie masy mięśniowej</option>
                         <option>Redukcja tkanki tłuszczowej</option>
                     </select>
                 </div>
-                <div class="container-login100-form-btn p-t-10">
-                    <button type="button" id="btn" class="submit btn btn-info pull-right">Oblicz</button>
+                <div class="form-group row">
+                    <div class="col-sm-3"></div>
+                    <div class="container-login100-form-btn col-sm-2">
+                        <button type="button" id="btn" class="submit btn btn-info pull-right">Oblicz</button>
+                    </div>
                 </div>
             </form>
         </div>
-        <div class="p-2 w-50">
+        <div class="col-6">
             <form method="post">
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label" id="Kcal">Kcal</label>
-                    <div class="col-sm-8">
-                        <input class="input100 Kcal" readonly type="text" name="Kcal" id="Kcal" placeholder=@Model.userKcal>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-form-label" id="Kcal">Kcal</label>
+                        <input class="col-sm-4 form-control Kcal" readonly type="text" name="Kcal" id="Kcal" placeholder=@Model.userKcal>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-form-label" id="Protein">Białko</label>
+                        <input class="col-sm-4 form-control Protein" readonly type="text" name="Protein" id="Protein" placeholder=@Model.userProtein>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label" id="Protein">Białko</label>
-                    <div class="col-sm-8">
-                        <input class="input100 Protein" readonly type="text" name="Protein" id="Protein" placeholder=@Model.userProtein>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-form-label" id="Carbs">Węglowodany</label>
+                        <input class="col-sm-4 form-control Carbs" readonly type="text" name="Carbs" id="Carbs" placeholder=@Model.userCarbs>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-form-label" id="Fats">Tłuszcze</label>
+                        <input class="col-sm-4 form-control Fats" readonly type="text" name="Fats" id="Fats" placeholder=@Model.userFats>
                     </div>
                 </div>
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label" id="Carbs">Węglowodany</label>
-                    <div class="col-sm-8">
-                        <input class="input100 Carbs" readonly type="text" name="Carbs" id="Carbs" placeholder=@Model.userCarbs>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label" id="Fats">Tłuszcze</label>
-                    <div class="col-sm-8">
-                        <input class="input100 Fats" readonly type="text" name="Fats" id="Fats" placeholder=@Model.userFats>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Przypisać te dane do Twojego zapotrzebowania?</label>
-                    <div class="col-sm-8">
-                        <button type="submit" id="submit_btn" class="submit btn btn-info pull-right">Tak</button>
-                    </div>
+                <div class="form-group">
+                    <label class="col-form-label">Przypisać te dane do Twojego zapotrzebowania?</label>
+                    <button type="submit" id="submit_btn" class="submit btn btn-info pull-right">Tak</button>
                 </div>
             </form>
         </div>

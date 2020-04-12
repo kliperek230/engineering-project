@@ -5,23 +5,21 @@
     Layout = "Shared/_LayoutUser";
 }
 
-<div class="form-group row">
-    <div class="p-2 w-50">
-        <form method="post">
-            <div class="form-group">
-                <label id="Product">Produkt</label>
-                <input type="text" class="form-control Product" name="Product" placeholder="np. Makaron" />
-            </div>
-            <div class="form-group">
-                <label id="RightCalve">RightCalve</label>
-                <input type="text" class="form-control Ammount" name="Ammount" placeholder="np. 50g" />
-            </div>
-            <div class="container-login100-form-btn p-t-10">
-                <button type="submit" id="submit_btn" class="submit btn btn-info pull-right">TAK</button>
-            </div>
-        </form>
-    </div>
+<div class="container d-flex flex-column">
+    <form method="post">
+        <div class="form-group row justify-content-center">
+            <label class="col-sm-2 col-form-label">Produkt</label>
+            <input type="text" class="col-sm-3 form-control" name="Product" placeholder="np. Makaron" />
+        </div>
+        <div class="form-group row justify-content-center">
+            <label class="col-sm-2 col-form-label">Ilość</label>
+            <input type="text" class="col-sm-3 form-control" name="Ammount" placeholder="np. 50g" />
+        </div>
+        <div class="form-group row justify-content-center">
+            <input type="submit" id="submit_btn" class="submit btn btn-info pull-right" name="submit_btn" value="TAK" />
+        </div>
+        <div class="form-group row justify-content-center">
+            <input type="submit" class="submit btn btn-info pull-right" name="return_btn" value="Wróć" />
+        </div>
+    </form>
 </div>
-<form method="post">
-    <input type="submit" name="Back" value="Back" />
-</form>

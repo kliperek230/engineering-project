@@ -60,13 +60,14 @@ namespace FOODMATE
                     connection.Open();
                     command.ExecuteNonQuery();
                     connection.Close();
-                    return RedirectToPage("HomePage");
+                    return RedirectToPage("../HomePage");
                 }
             }
         }
 
         public IActionResult OnGetLogout()
         {
+            HttpContext.Session.Clear();
             return RedirectToPage("../Login");
         }
     }

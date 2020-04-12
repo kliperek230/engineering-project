@@ -7,7 +7,6 @@
 }
 
 <!DOCTYPE html>
-
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -15,85 +14,73 @@
     <script src="//cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script>
     <title>ColumnChart</title>
 </head>
-
 <body>
     <script type="text/javascript" src="//cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
     <script type="text/javascript" src="//cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script>
 
-    <h1>Welcome user with ID: @Model.userID</h1>
-    <div class="p-2 w-50">
+    <div class="container d-flex flex-column">
         <form method="post">
-            <div class="form-group row">
-                <div class="col-md-3">
-                    <select class="form-control StartDay" name="StartDay">
-                        @for (var x = 1; x <= 31; x++)
-                        {
-                            <option>@x</option>
-                        }
-                    </select>
-                </div>
-                <div class="col-md-3">
-                    <select class="form-control StartMonth" name="StartMonth">
-                        <option>Styczeń</option>
-                        <option>Luty</option>
-                        <option>Marzec</option>
-                        <option>Kwiecień</option>
-                        <option>Maj</option>
-                        <option>Czerwiec</option>
-                        <option>Lipiec</option>
-                        <option>Sierpień</option>
-                        <option>Wrzesień</option>
-                        <option>Październik</option>
-                        <option>Listopad</option>
-                        <option>Grudzień</option>
-                    </select>
-                </div>
-                <div class="col-md-3">
-                    <select class="form-control StartYear" name="StartYear">
-                        @for (var x = 2020; x >= 1901; x--)
-                        {
-                            <option>@x</option>
-                        }
-                    </select>
-                </div>
+            <div class="form-group row justify-content-center">
+                <label class="col-sm-1 col-form-label">Od</label>
+                <select class="custom-select col-sm-1 form-control StartDay" name="StartDay">
+                    @for (var x = 1; x <= 31; x++)
+                    {
+                        <option>@x</option>
+                    }
+                </select>
+                <select class="custom-select col-sm-2 form-control StartMonth" name="StartMonth">
+                    <option>Styczeń</option>
+                    <option>Luty</option>
+                    <option>Marzec</option>
+                    <option>Kwiecień</option>
+                    <option>Maj</option>
+                    <option>Czerwiec</option>
+                    <option>Lipiec</option>
+                    <option>Sierpień</option>
+                    <option>Wrzesień</option>
+                    <option>Październik</option>
+                    <option>Listopad</option>
+                    <option>Grudzień</option>
+                </select>
+                <select class="custom-select col-sm-2 form-control StartYear" name="StartYear">
+                    @for (var x = 2020; x >= 1901; x--)
+                    {
+                        <option>@x</option>
+                    }
+                </select>
             </div>
-            <div class="form-group row">
-                <div class="col-md-3">
-                    <select class="form-control EndDay" name="EndDay">
-                        @for (var x = 1; x <= 31; x++)
-                        {
-                            <option>@x</option>
-                        }
-                    </select>
-                </div>
-                <div class="col-md-3">
-                    <select class="form-control EndMonth" name="EndMonth">
-                        <option>Styczeń</option>
-                        <option>Luty</option>
-                        <option>Marzec</option>
-                        <option>Kwiecień</option>
-                        <option>Maj</option>
-                        <option>Czerwiec</option>
-                        <option>Lipiec</option>
-                        <option>Sierpień</option>
-                        <option>Wrzesień</option>
-                        <option>Październik</option>
-                        <option>Listopad</option>
-                        <option>Grudzień</option>
-                    </select>
-                </div>
-                <div class="col-md-3">
-                    <select class="form-control EndYear" name="EndYear">
-                        @for (var x = 2020; x >= 1901; x--)
-                        {
-                            <option>@x</option>
-                        }
-                    </select>
-                </div>
+            <div class="form-group row justify-content-center">
+                <label class="col-sm-1 col-form-label">Do</label>
+                <select class="custom-select col-sm-1 form-control EndDay" name="EndDay">
+                    @for (var x = 1; x <= 31; x++)
+                    {
+                        <option>@x</option>
+                    }
+                </select>
+                <select class="custom-select col-sm-2 form-control EndMonth" name="EndMonth">
+                    <option>Styczeń</option>
+                    <option>Luty</option>
+                    <option>Marzec</option>
+                    <option>Kwiecień</option>
+                    <option>Maj</option>
+                    <option>Czerwiec</option>
+                    <option>Lipiec</option>
+                    <option>Sierpień</option>
+                    <option>Wrzesień</option>
+                    <option>Październik</option>
+                    <option>Listopad</option>
+                    <option>Grudzień</option>
+                </select>
+                <select class="custom-select col-sm-2 form-control EndYear" name="EndYear">
+                    @for (var x = 2020; x >= 1901; x--)
+                    {
+                        <option>@x</option>
+                    }
+                </select>
             </div>
-            <div class="form-group">
-                <label id="BodyPart">Część ciała</label>
-                <select class="form-control BodyPart" name="BodyPart">
+            <div class="form-group row justify-content-center">
+                <label class="col-sm-2 col-form-label">Część ciała</label>
+                <select class="custom-select col-sm-2 form-control BodyPart" name="BodyPart">
                     <option>Lewa łydka</option>
                     <option>Prawa łydka</option>
                     <option>Lewe udo</option>
@@ -107,14 +94,11 @@
                     <option>Prawe przedramię</option>
                     <option>Waga</option>
                 </select>
-            </div>
-            <div class="container-login100-form-btn p-t-10">
+                <div class="col-sm-1"></div>
                 <input type="submit" id="submit_btn" class="submit btn btn-info pull-right" asp-page-handler="ChartGenerator" value="TAK" />
             </div>
         </form>
-    </div>
-    <div>
-        <div id="chartContainer">@Html.Raw(ViewData["Chart"])</div>
+        <div id="chartContainer" class="align-self-center">@Html.Raw(ViewData["Chart"])</div>
     </div>
 </body>
 </html>
