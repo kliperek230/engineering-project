@@ -15,7 +15,7 @@ namespace FOODMATE
     public class RegisterModel : PageModel
     {
         // KONIECZNIE TRZEBA USUN¥Æ ST¥D TAK JAWNY CONNECTION STRING!!!!!!!!!!!!!!!!!!!
-        private string _connectionString = "Server=KACPER;Database=FOODMATE;Trusted_Connection=True;";
+        private string _connectionString = "Server=localhost;Database=FOODMATE;Trusted_Connection=True;";
 
         FoodmateContext db = new FoodmateContext();
 

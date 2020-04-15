@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using Microsoft.Data.SqlClient;
 using System;
 using System.Security.Cryptography;
+using Microsoft.Extensions.Configuration;
 
 namespace FOODMATE.Pages
 {
@@ -15,7 +16,7 @@ namespace FOODMATE.Pages
         FoodmateContext db = new FoodmateContext();
 
         // KONIECZNIE TRZEBA USUNĄĆ STĄD TAK JAWNY CONNECTION STRING!!!!!!!!!!!!!!!!!!!
-        private string _connectionString = "Server=KACPER;Database=FOODMATE;Trusted_Connection=True;";
+        private string _connectionString = "Server=localhost;Database=FOODMATE;Trusted_Connection=True;";
 
         [BindProperty]
         public string Username { get; set; }

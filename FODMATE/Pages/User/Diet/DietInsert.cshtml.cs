@@ -12,7 +12,7 @@ namespace FODMATE
     public class DietInsertModel : PageModel
     {
         // KONIECZNIE TRZEBA USUNĄĆ STĄD TAK JAWNY CONNECTION STRING!!!!!!!!!!!!!!!!!!!
-        private string _connectionString = "Server=KACPER;Database=FOODMATE;Trusted_Connection=True;";
+        private string _connectionString = "Server=localhost;Database=FOODMATE;Trusted_Connection=True;";
 
         public void OnGet() { }
 

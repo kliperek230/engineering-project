@@ -13,7 +13,7 @@ namespace FODMATE
     public class ResultsWeightModel : PageModel
     {
         // KONIECZNIE TRZEBA USUNĄĆ STĄD TAK JAWNY CONNECTION STRING!!!!!!!!!!!!!!!!!!!
-        private string _connectionString = "Server=KACPER;Database=FOODMATE;Trusted_Connection=True;";
+        private string _connectionString = "Server=localhost;Database=FOODMATE;Trusted_Connection=True;";
         public int userID { get; set; }
         public int measurementID { get; set; }
         public string measurementDate { get; set; }

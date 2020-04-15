@@ -12,7 +12,7 @@ namespace FOODMATE
     public class CalculatorModel : PageModel
     {
         // KONIECZNIE TRZEBA USUN¥Æ ST¥D JAWNY CONNECTION STRING!!!!!!!!!!!!!!!!!!!
-        private string _connectionString = "Server=KACPER;Database=FOODMATE;Trusted_Connection=True;";
+        private string _connectionString = "Server=localhost;Database=FOODMATE;Trusted_Connection=True;";
 
         public int userID{ get; set; }
         public string userSex { get; set; }
